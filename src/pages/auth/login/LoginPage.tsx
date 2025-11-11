@@ -63,6 +63,7 @@ export const LoginPage = () => {
           Registration
         </NavLink>
       </form>
+      <p>You can find users to enter <a target="_blank" href='https://api.escuelajs.co/api/v1/users'>here</a></p>
     </div>
   );
 };
