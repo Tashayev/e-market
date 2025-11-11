@@ -1,5 +1,5 @@
 import CategoryCreateModal from "@/components/modals/category-modal/CategoryCreateModal";
-import CategoryUpdateModal from "@/components/modals/category-modal/CategoryUpdateModal";
+
 import CategoryPopover from "@/components/popover/CategoryPopover";
 import { useProducts } from "@/features/products/useProduct";
 import type { Categories } from "@/types/Products";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function AdminCategoriesPage() {
   const { categories, fetchCategories } = useProducts();
   const [isListOpen, setIsListOpen] = useState(false);
-  const [isUpdateModalOpen, setIsUpdateModal] = useState(false)
+  //const [isUpdateModalOpen, setIsUpdateModal] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<Categories | null>(
     null
   );
