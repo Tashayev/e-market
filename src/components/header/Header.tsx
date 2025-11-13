@@ -7,7 +7,7 @@ import type { ToggleSidebarProp } from "@/types/LayoutProps";
 
 export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
   const { user, logout } = useUser();
-  const avatarUrl = user?.avatar ?? null;
+  
 
   const isMobile = useIsMobile();
 
@@ -20,7 +20,7 @@ export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
       )}
 
       <img
-        src={avatarUrl!}
+        src={user?.avatar}
         alt="User avatar"
         style={{
           width: 40,
