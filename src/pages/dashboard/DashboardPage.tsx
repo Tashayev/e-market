@@ -12,7 +12,7 @@ export const DashboardPage = () => {
   return (
     <div>
       <h2></h2>
-      <p>Добро пожаловать, {user?.name}</p>
+      <p>Welcome, {user?.name}</p>
       <div>
         {categories.map((c) => (
           <CategoryCard category={c} key={c.id} />
