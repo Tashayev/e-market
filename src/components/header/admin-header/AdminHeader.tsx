@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { CircleUserRound, Menu } from "lucide-react";
+
+import {  Menu } from "lucide-react";
 
 import { style } from "../headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
@@ -14,41 +14,15 @@ export default function AdminHeader({handleToggleAdminSidebar}: ToggleAdminSideb
     const avatarUrl = user?.avatar ?? null;
     const isMobile = useIsMobile()
   
-    const [isAvatarValid, setIsAvatarValid] = useState<boolean | null>(null);
+   
   
-    useEffect(() => {
-      if (!avatarUrl) {
-        setIsAvatarValid(false);
-        return;
-      }
-  
-      let cancelled = false;
-      const img = new Image();
-  
-      img.onload = () => {
-        if (!cancelled) setIsAvatarValid(true);
-      };
-      img.onerror = () => {
-        if (!cancelled) setIsAvatarValid(false);
-      };
-  
-      img.src = avatarUrl;
-  
-      const timeout = window.setTimeout(() => {
-        if (!cancelled && isAvatarValid === null) setIsAvatarValid(false);
-      }, 7000);
-  
-      return () => {
-        cancelled = true;
-        clearTimeout(timeout);
-      };
-    }, [avatarUrl]);
+   
 
   return (
     <div style={style.header}>
       {isMobile && <Button onClick={handleToggleAdminSidebar}><Menu color="#ffffff" /></Button>}
       <Typography>Admin Panel</Typography>
-      {isAvatarValid ? (
+     
         <img
           src={avatarUrl!}
           alt="User avatar"
@@ -58,11 +32,9 @@ export default function AdminHeader({handleToggleAdminSidebar}: ToggleAdminSideb
             borderRadius: "50%",
             objectFit: "cover",
           }}
-          onError={() => setIsAvatarValid(false)}
+         
         />
-      ) : (
-        <CircleUserRound size={40} />
-      )}
+      
 
       <button onClick={logout}>Log out</button>
     </div>
