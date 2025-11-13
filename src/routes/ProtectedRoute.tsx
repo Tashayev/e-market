@@ -31,8 +31,18 @@ export const ProtectedRoute = () => {
 
       <div style={style.container}>
         {isSidebarOpen && (
-          <div>
-            <Sidebar />
+          <div style={{
+              position: isMobile ? "fixed" : "relative",
+              top: 0,
+              left: 0,
+              width: isMobile ? "70%" : "250px",
+              height: isMobile ? "100vh" : "auto",
+              backgroundColor: "#fff",
+              boxShadow: isMobile ? "2px 0 8px rgba(0,0,0,0.3)" : "none",
+              zIndex: isMobile ? 1001 : "auto",
+              transition: "transform 0.3s ease",
+            }}>
+            <Sidebar handleToggleSidebar={handleToggleSidebar}/>
           </div>
         )}
 

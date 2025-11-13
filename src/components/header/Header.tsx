@@ -5,12 +5,10 @@ import { style } from "./headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
 import { Button } from "@mui/material";
 import useIsMobile from "@/tools/hooks/useIsMobile";
+import type { ToggleSidebarProp } from "@/types/LayoutProps";
 
-interface propType{
-  handleToggleSidebar:() => void,
-  
-}
-export default function Header({handleToggleSidebar}:propType) {
+
+export default function Header({handleToggleSidebar}:ToggleSidebarProp) {
 
   const {user, logout} = useUser();
   const avatarUrl = user?.avatar ?? null;

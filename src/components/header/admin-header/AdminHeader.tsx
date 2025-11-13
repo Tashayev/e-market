@@ -5,13 +5,11 @@ import { style } from "../headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
 import { Button,  Typography } from "@mui/material";
 import useIsMobile from "@/tools/hooks/useIsMobile";
-
-interface propType{
-  handleToggleAdminSidebar: ()=>void
-}
+import type { ToggleAdminSidebarProp } from "@/types/LayoutProps";
 
 
-export default function AdminHeader({handleToggleAdminSidebar}: propType) {
+
+export default function AdminHeader({handleToggleAdminSidebar}: ToggleAdminSidebarProp) {
   const {user, logout} = useUser();
     const avatarUrl = user?.avatar ?? null;
     const isMobile = useIsMobile()

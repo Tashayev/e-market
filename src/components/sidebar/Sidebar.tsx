@@ -1,16 +1,20 @@
 import { useUser } from "@/features/auth/user/useUser";
+import useIsMobile from "@/tools/hooks/useIsMobile";
+import type { ToggleSidebarProp } from "@/types/LayoutProps";
 
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { X } from "lucide-react";
 
 import { NavLink } from "react-router";
 
-export default function Sidebar() {
+export default function Sidebar({handleToggleSidebar}:ToggleSidebarProp) {
+  const isMobile = useIsMobile()
   const { user } = useUser();  
   const sidebarData = [
     { name: "Main page", id: 4, navigator: "/" },    
@@ -20,6 +24,8 @@ export default function Sidebar() {
   return (
     <Box sx={{ width: 250 }}>
       <List>
+      {isMobile && <Button onClick={handleToggleSidebar}><X/></Button>}
+
         {sidebarData.map((c) => (
           <ListItem key={c.id} disablePadding>
             <ListItemButton>
