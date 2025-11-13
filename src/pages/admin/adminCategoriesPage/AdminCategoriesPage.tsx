@@ -1,6 +1,5 @@
-import CategoryCreateModal from "@/components/modals/category-modal/CategoryCreateModal";
-
-import CategoryPopover from "@/components/popover/CategoryPopover";
+import CategoryCreateModal from "@/components/modals/category-modals/CategoryCreateModal";
+import EntityPopover from "@/components/popover/EntityPopover";
 import { useProducts } from "@/features/products/useProduct";
 import type { Categories } from "@/types/Products";
 import { Button, Box, Divider } from "@mui/material";
@@ -9,11 +8,8 @@ import { useEffect, useState } from "react";
 
 export default function AdminCategoriesPage() {
   const { categories, fetchCategories } = useProducts();
-  const [isListOpen, setIsListOpen] = useState(false);
-  //const [isUpdateModalOpen, setIsUpdateModal] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState<Categories | null>(
-    null
-  );
+  const [isListOpen, setIsListOpen] = useState(false);  
+  const [selectedCategory, setSelectedCategory] = useState<Categories | null>(null);
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -48,17 +44,17 @@ export default function AdminCategoriesPage() {
             </Button>
           </Box>
         ))}
-      <CategoryPopover
+      <EntityPopover
         popoverId={id}
         open={open}
         handleClose={handleClose}
         anchorEl={anchorEl}
         name={selectedCategory?.name}
-        id={selectedCategory?.id}
+        categoryId={selectedCategory?.id}
+        entityType= 'category'
       />
       {isListOpen && <Divider />}
       <CategoryCreateModal />
-      
     </div>
   );
 }

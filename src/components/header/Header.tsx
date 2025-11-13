@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, Menu } from "lucide-react";
 
 import { style } from "./headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
+import { Button } from "@mui/material";
+import useIsMobile from "@/tools/hooks/useIsMobile";
 
-
-export default function Header() {
+interface propType{
+  handleToggleSidebar:() => void,
+  
+}
+export default function Header({handleToggleSidebar}:propType) {
 
   const {user, logout} = useUser();
   const avatarUrl = user?.avatar ?? null;
 
   const [isAvatarValid, setIsAvatarValid] = useState<boolean | null>(null);
-
+  const isMobile = useIsMobile()
   useEffect(() => {
     if (!avatarUrl) {
       setIsAvatarValid(false);
@@ -40,14 +45,13 @@ export default function Header() {
     };
   }, [avatarUrl]);
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("user");
-  //   window.location.reload();
-  // };
+  
 
   return (
     <div style={style.header}>
+      {isMobile && <Button onClick={handleToggleSidebar}><Menu color="#ffffff" /></Button>}
       {isAvatarValid ? (
+
         <img
           src={avatarUrl!}
           alt="User avatar"

@@ -11,7 +11,7 @@ export default function AdminSidebar() {
     { name: "Main page", id: 4, navigator: "/" },
     { name: "Categories control", id: 5, navigator: "/admin/categories" },
     { name: "Products control", id: 6, navigator: "/admin/products" },
-    { name: "Users control", id: 7, navigator: "/admin/users" },
+   
   ];
   return (
     <Box sx={{ width: 250 }}>

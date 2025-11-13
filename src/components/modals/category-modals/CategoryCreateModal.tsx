@@ -6,26 +6,21 @@ import { TextField } from "@mui/material";
 
 import { useState } from "react";
 import { useProducts } from "@/features/products/useProduct";
-import { style } from "./CategoryModalSrtyle";
+import { style } from "../ModalSrtyle";
 
-interface idType{
-  id: number | undefined,
-  selectedName: string | undefined
-}
-export default function CategoryUpdateModal({id, selectedName}: idType) {
+export default function CategoryCreateModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);  
- const {updateCategory} = useProducts();
-  const [name, setName] = useState('');
-  const [image, setImage] = useState('')
-  
-  const handleUpdateCategory = () => {    
-    updateCategory({name, image, id})
+  const handleClose = () => setOpen(false);
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const {createCategory} = useProducts();
+  const handleCreateCategory = async () => {
+    await createCategory({name, image})
   }
   return (
     <div>
-      <Button sx={{width: '100%'}} onClick={handleOpen} variant="contained" color="primary">Update {selectedName}</Button>
+      <Button onClick={handleOpen} variant="contained" color="primary">Create category</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -44,18 +39,9 @@ export default function CategoryUpdateModal({id, selectedName}: idType) {
             value={image}
             onChange={(e) => setImage(e.target.value)}
           />
-           <Button  variant="contained" color="success" onClick={()=>{handleUpdateCategory(); handleClose()}}>Update {selectedName}</Button>
+          <Button onClick={()=>{handleCreateCategory(); handleClose()}}  variant="contained" color="primary">Create</Button>
         </Box>
       </Modal>
     </div>
   );
 }
-
-
-
-// const {updateCategory} = useProducts();
-//   if(!category) return null;
-//   const {name, image, id } = category;
-//   const handleUpdate = () => {
-//     updateCategory({name, image, id})
-//   }

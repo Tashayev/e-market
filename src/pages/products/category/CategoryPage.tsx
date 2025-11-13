@@ -2,10 +2,10 @@ import ProductCard from "@/components/product-card/ProductCard";
 import { useProducts } from "@/features/products/useProduct";
 import { useEffect } from "react"
 import { useParams } from "react-router"
-import { style } from "./subCategory";
+import { style } from "./category";
 
 
-export default function SubCategoryPage() {
+export default function CategoryPage() {
   const {id} = useParams<{id: string}>();
   const {products, fetchProductsByCategory} = useProducts()
   useEffect(()=>{

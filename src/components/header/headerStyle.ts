@@ -1,3 +1,5 @@
+
+
 export const style = {
   header:{
     backgroundColor: '#0a80a3',
@@ -10,6 +12,7 @@ export const style = {
     top: '0',
     alignItems: 'center',
     gap: '10px',
-    color: '#fff'    
+    color: '#fff' ,
+    zIndex:'200'   
   }
 }as const

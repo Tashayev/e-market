@@ -23,7 +23,7 @@ export default function CategoryCard({ category }: CategoriesProps) {
           </Typography>
         </CardContent>
         <CardActions>
-          <NavLink to={`/categories/${id}`}>
+          <NavLink to={`/category/${id}`}>
             <Button size="small">Go to {name}</Button>
           </NavLink>
         </CardActions>

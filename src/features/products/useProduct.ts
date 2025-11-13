@@ -5,9 +5,13 @@ import { useSelector } from "@/tools/hooks/useSelector";
 import { getProductByCategory } from "./thunk/getProductByCategory";
 import { getProductById } from "./thunk/getProductById";
 import { createCategory } from "./thunk/createCategory";
-import type { CreateCategory, UpdateCategory } from "@/types/Products";
+import type { CreateCategory,  CreateProduct,  UpdateCategory, UpdateProduct } from "@/types/Products";
 import { updateCategory } from "./thunk/updateCategory";
 import { deleteCategory } from "./thunk/deleteCategory";
+import  { deleteProduct } from "./thunk/deleteProduct";
+import { updateProduct } from "./thunk/updateProduct";
+import { createProduct } from "./thunk/createProduct";
+import { getCategoryById } from "./thunk/getCategoryById";
 
 export const useProducts = () => {
   const dispatch = useDispatch();
@@ -20,6 +24,9 @@ export const useProducts = () => {
       dispatch(getProductByCategory(id)).unwrap(),
     fetchProductById: async (id: number) =>
       dispatch(getProductById(id)).unwrap(),
+    fetchCategoryById: async (id: number) =>
+      dispatch(getCategoryById(id)).unwrap(),
+    categoryById: useSelector((state) => state.product.productById),
     productById: useSelector((state) => state.product.productById),
     createCategory: async (data: CreateCategory) =>
       dispatch(createCategory(data)).unwrap(),
@@ -27,5 +34,11 @@ export const useProducts = () => {
       dispatch(updateCategory(data)).unwrap(),
     deleteCategory: async(id: number) => 
       dispatch(deleteCategory(id)).unwrap(),
+    deleteProduct: async(id: number) => 
+      dispatch(deleteProduct(id)).unwrap(),
+    updateProduct: async (data: UpdateProduct) => 
+      dispatch(updateProduct(data)).unwrap(),
+    createProduct: async (data: CreateProduct) =>
+      dispatch(createProduct(data)).unwrap(),
   };
 };

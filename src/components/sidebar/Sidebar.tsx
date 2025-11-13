@@ -1,4 +1,5 @@
 import { useUser } from "@/features/auth/user/useUser";
+
 import { Divider } from "@mui/material";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -6,13 +7,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+
 import { NavLink } from "react-router";
 
 export default function Sidebar() {
-  const { user } = useUser();
+  const { user } = useUser();  
   const sidebarData = [
-    { name: "Main page", id: 4, navigator: "/" },
-    { name: "Categories", id: 1, navigator: "/categories" },
+    { name: "Main page", id: 4, navigator: "/" },    
     { name: "Profile", id: 2, navigator: "/profile" },
     { name: "Bucket", id: 3, navigator: "/bucket" },
   ];
@@ -36,7 +37,7 @@ export default function Sidebar() {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon></ListItemIcon>
-              <NavLink to="/admin/users">
+              <NavLink to="/admin/categories">
                 <ListItemText primary="Admin panel" />
               </NavLink>
             </ListItemButton>

@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, Menu } from "lucide-react";
 
 import { style } from "../headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
-import { Typography } from "@mui/material";
+import { Button,  Typography } from "@mui/material";
+import useIsMobile from "@/tools/hooks/useIsMobile";
+
+interface propType{
+  handleToggleAdminSidebar: ()=>void
+}
 
 
-
-export default function AdminHeader() {
+export default function AdminHeader({handleToggleAdminSidebar}: propType) {
   const {user, logout} = useUser();
     const avatarUrl = user?.avatar ?? null;
+    const isMobile = useIsMobile()
   
     const [isAvatarValid, setIsAvatarValid] = useState<boolean | null>(null);
   
@@ -43,6 +48,7 @@ export default function AdminHeader() {
 
   return (
     <div style={style.header}>
+      {isMobile && <Button onClick={handleToggleAdminSidebar}><Menu color="#ffffff" /></Button>}
       <Typography>Admin Panel</Typography>
       {isAvatarValid ? (
         <img

@@ -8,7 +8,7 @@ export interface Categories{
 }
 
 export interface Product{ 
-    id: string,
+    id: number,
     title: string,
     slug: string,
     price: number,
@@ -25,6 +25,7 @@ export interface ProductState {
   products: Product[]; 
   categories: Categories[]; 
   productById: Product | null
+  
 }
 export interface ProductTypeCard{
   title: string;
@@ -42,4 +43,19 @@ export interface UpdateCategory{
   image: string,
   id: number | undefined
   
+}
+
+export interface UpdateProduct {
+  id: number | undefined;
+  title: string;
+  price: number;
+  
+}
+
+export interface CreateProduct{
+  title: string,
+  price: number,
+  description: string,
+  categoryId: number,
+  images?: string[]
 }

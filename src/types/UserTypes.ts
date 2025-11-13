@@ -33,6 +33,11 @@ export interface RegisterForm {
   password: string;
   avatar?: string
 }
+export interface UpdateUser{
+  email: string,
+  name: string,
+  id: number
+}
 
 export interface FindUserForm {
   id: number;

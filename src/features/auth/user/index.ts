@@ -3,6 +3,7 @@ import * as reducers from "./reducers";
 import { loginUser } from "./thunk/login";
 import { getUser } from "./thunk/getUser";
 import type { UserState } from "@/types/UserTypes";
+import { updateUser } from "./thunk/updateUser";
 
 const hasToken = !!localStorage.getItem("accessToken");
 
@@ -27,6 +28,9 @@ export const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state) => {
         state.isLoading = false;
         state.isAuthenticated = true;        
+      })
+      .addCase(updateUser.fulfilled, (state, action) =>{
+        state.user = action.payload
       })
       .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;

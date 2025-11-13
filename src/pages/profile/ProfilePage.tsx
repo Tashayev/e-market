@@ -1,6 +1,8 @@
 import React from "react";
 import { styles } from "./profile";
 import { useUser } from "@/features/auth/user/useUser";
+import UpdateUserModal from "@/components/modals/user-modals/UpdateUserModal";
+
 
 
 
@@ -10,7 +12,7 @@ export const ProfilePage: React.FC = () => {
   return (
     <div >
       <div style={styles.card}>
-        <img src={user?.avatar}/>
+        <img src={user?.avatar} width={300}/>
 
         <h2 style={styles.name}>{user?.name}</h2>
         <p style={styles.role}>{user?.role}</p>
@@ -20,7 +22,8 @@ export const ProfilePage: React.FC = () => {
           
         </div>
 
-        <button style={styles.button}>Редактировать</button>
+         <UpdateUserModal id={user?.id} />
+
       </div>
     </div>
   );

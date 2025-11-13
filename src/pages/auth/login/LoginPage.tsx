@@ -23,7 +23,7 @@ export const LoginPage = () => {
       }
       const user = await loginUser({ email, password });
       if (user.role === 'admin') {
-        navigate("/admin/users");
+        navigate("/admin/categories");
         return;
       }
 

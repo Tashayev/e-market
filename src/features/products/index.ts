@@ -7,8 +7,13 @@ import { getProducts } from "./thunk/getProducts";
 import { getProductByCategory } from "./thunk/getProductByCategory";
 import { getProductById } from "./thunk/getProductById";
 import { createCategory } from "./thunk/createCategory";
-import { updateCategory } from "./thunk/updateCategory";
+
 import { deleteCategory } from "./thunk/deleteCategory";
+import { deleteProduct } from "./thunk/deleteProduct";
+import { updateCategory } from "./thunk/updateCategory";
+import { updateProduct } from "./thunk/updateProduct";
+import { createProduct } from "./thunk/createProduct";
+import { getCategoryById } from "./thunk/getCategoryById";
 
 const initialState: ProductState = {
   isLoading: false,
@@ -33,9 +38,12 @@ export const productSlice = createSlice({
       .addCase(getCategories.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(getProducts.fulfilled, (state, action) => {
-        state.products = action.payload;
+      .addCase(getCategoryById.fulfilled, (state, action) => {        
+        state.categories = action.payload;
       })
+      // .addCase(getProducts.fulfilled, (state, action) => {
+      //   state.products = action.payload;
+      // })
       .addCase(getProducts.pending, (state) => {
         state.isLoading = true;
       })
@@ -81,11 +89,23 @@ export const productSlice = createSlice({
         const id = action.payload;
         state.categories = state.categories.filter((c) => c.id !== id);
       })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        const id = action.payload;
+        state.products = state.products.filter((p) => p.id !== id);
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const updateProduct = action.payload;
+
+        state.products = state.categories.map((product) =>
+          product.id === updateProduct.id ? updateProduct : product
+        );
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.products = [...state.products, action.payload];
+      })
       
   },
 });
 
 export const productActions = productSlice.actions;
 export default productSlice.reducer;
-// export const userActions = userSlice.actions;
-// export default userSlice.reducer;

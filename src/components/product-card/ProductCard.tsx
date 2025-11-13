@@ -16,7 +16,7 @@ export default function ProductCard({product}: ProductProps) {
       <Typography>
         {price}
       </Typography>
-      <NavLink to={`/products/${id}`} >Open</NavLink>
+      <NavLink to={`/product/${id}`} >Open</NavLink>
     </div>
   )
 }

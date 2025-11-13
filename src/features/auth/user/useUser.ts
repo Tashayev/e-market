@@ -7,6 +7,7 @@ import type {
   AvailabelUser,
   LoginRequest,
   RegisterForm,
+  UpdateUser,
 } from "@/types/UserTypes";
 
 import { getUser } from "./thunk/getUser";
@@ -17,6 +18,7 @@ import { registerUser } from "./thunk/register";
 
 import { checkUserEmail } from "./thunk/checkUserEmail";
 import { remove } from "@/utils/storage";
+import { updateUser } from "./thunk/updateUser";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -50,5 +52,7 @@ export const useUser = () => {
       dispatch(registerUser(data)).unwrap(),
     availabelUser: async (data: AvailabelUser) =>
       dispatch(checkUserEmail(data)).unwrap(),
+    updateUser: async (data: UpdateUser) =>
+      dispatch(updateUser(data)).unwrap(),
   };
 };
