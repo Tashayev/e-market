@@ -1,5 +1,4 @@
 import { Menu } from "lucide-react";
-
 import { style } from "../headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
 import { Button, Typography } from "@mui/material";
