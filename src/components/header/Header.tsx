@@ -1,4 +1,4 @@
-import { CircleUserRound, Menu } from "lucide-react";
+import {  Menu } from "lucide-react";
 import { style } from "./headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
 import { Button } from "@mui/material";
@@ -30,7 +30,7 @@ export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
         }}
       />
 
-      <CircleUserRound size={40} />
+     
 
       <button onClick={logout}>Log out</button>
     </div>
