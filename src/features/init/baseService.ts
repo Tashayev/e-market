@@ -1,6 +1,6 @@
 import { postRefreshToken } from "@/features/auth/user/thunk/postRefreshToken";
-import { store } from "@/store/store";
-import { save, remove, load } from "@/utils/storage";
+import { store } from "@/features/store/store";
+// import { remove } from "@/utils/storage";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -53,8 +53,8 @@ baseService.interceptors.response.use(
           store.dispatch(postRefreshToken(refreshToken));
         }
       } catch (error) {
-        remove(ACCESS_TOKEN_KEY);
-        remove(REFRESH_TOKEN_KEY);
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
+        localStorage.removeItem(REFRESH_TOKEN_KEY);
         delete baseService.defaults.headers.common[AUTH_HEADER];
       }
     }

@@ -1,29 +1,30 @@
-import { toast } from "react-toastify";
+
+// export function load<T>(key: string, defaultValue: T): T {
+//   try {
+//     const item = localStorage.getItem(key);
+//     return item ? JSON.parse(item) : defaultValue;
+//   } catch (error) {
+//     console.error(`Error loading ${key} from localStorage:`, error);
+//     return defaultValue;
+//   }
+// }
 
 
-export const load = (key: string) => 
-  localStorage.getItem(key);
+// export function save<T>(key: string, value: T): void {
+//   try {
+//     const serialized = JSON.stringify(value);
+//     localStorage.setItem(key, serialized);
+//   } catch (error) {
+//     console.error(`Error saving ${key} to localStorage:`, error);
+//     throw error;
+//   }
+// }
 
 
-
-
-
-
-export function save<T>(key: string, value: T): boolean {
-  try {
-    const serialized = JSON.stringify(value);
-    localStorage.setItem(key, serialized);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-export function remove(key: string): void {
-  try {
-    localStorage.removeItem(key);
-  } catch (err) {
-    
-    toast.error(`Error: ${err}`)
-  }
-}
+// export function remove(key: string): void {
+//   try {
+//     localStorage.removeItem(key);
+//   } catch (error) {
+//     console.error(`Error removing ${key} from localStorage:`, error);
+//   }
+// }

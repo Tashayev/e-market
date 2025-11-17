@@ -17,7 +17,7 @@ import { userActions } from ".";
 import { registerUser } from "./thunk/register";
 
 import { checkUserEmail } from "./thunk/checkUserEmail";
-import { remove } from "@/utils/storage";
+
 import { updateUser } from "./thunk/updateUser";
 
 export const useUser = () => {
@@ -29,8 +29,8 @@ export const useUser = () => {
   const user = useSelector(({ user }) => user.user);
   const logout = () => {
     dispatch(userActions.removeUserDetails());
-    remove("accessToken");
-    remove("refreshToken");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     delete baseService.defaults.headers.common[authHeader];
   };
 

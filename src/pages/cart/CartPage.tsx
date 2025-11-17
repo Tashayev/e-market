@@ -1,20 +1,28 @@
-import { useUser } from "@/features/auth/user/useUser";
+import CartCard from "@/components/cards/category-cards/cart-cards/CartCard";
 import { useCarts } from "@/features/cart/useCart";
-import { Typography } from "@mui/material";
-
+import { Box, Grid, Typography } from "@mui/material";
 
 export default function CartPage() {
-  const {user} = useUser();
-  const {cart, removeFromCart} = useCarts();
+  const { cartProducts, totalPrice } = useCarts();
   return (
-    <div>
-      {cart.map(item=>(
-        <div>
-          <Typography>
-            
-          </Typography>
-        </div>
-      ))}
-    </div>
-  )
+    <Box>
+      {cartProducts.length > 0 ? (
+        <Box>
+          <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            {cartProducts.map((p) => (
+              <CartCard
+                id={p.id}
+                quantity={p.quantity}
+                title={p.title}
+                price={p.price}
+              />
+            ))}
+          </Grid>
+          <Typography>Total cart: {totalPrice}$</Typography>
+        </Box>
+      ) : (
+        <Typography>Cart is empty</Typography>
+      )}
+    </Box>
+  );
 }

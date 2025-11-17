@@ -1,5 +1,5 @@
 import { useUser } from "@/features/auth/user/useUser";
-import CategoryCard from "@/components/carts/category-cards/CategoryCard";
+import CategoryCard from "@/components/cards/category-cards/CategoryCard";
 import { useProducts } from "@/features/products/useProduct";
 import { useEffect } from "react";
 

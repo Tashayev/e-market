@@ -3,7 +3,7 @@ import { router } from "./routes/routes.ts";
 import "./index.css";
 import { useUser } from "./features/auth/user/useUser.ts";
 import { useEffect, useState } from "react";
-import { load } from "./utils/storage.ts";
+
 import { toast, ToastContainer } from "react-toastify";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   const [initialized, setInitialized] = useState(false);
   useEffect(() => {
     const initUser = async () => {
-      const token = load("accessToken");     
+      const token = localStorage.getItem("accessToken");     
       if (!token) {
         setInitialized(true);
         return;

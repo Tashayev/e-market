@@ -11,14 +11,16 @@ import  { deleteProduct } from "./thunk/deleteProduct";
 import { updateProduct } from "./thunk/updateProduct";
 import { createProduct } from "./thunk/createProduct";
 import { getCategoryById } from "./thunk/getCategoryById";
+import { getProducts } from "./thunk/getProducts";
 
 export const useProducts = () => {
   const dispatch = useDispatch();
 
   return {
-    categories: useSelector((state) => state.product.categories),
+    categories: useSelector((state) => state.product.categories),    
     fetchCategories: async () => dispatch(getCategories()).unwrap(),
     products: useSelector((state) => state.product.products),
+    fetchAllProducts: async () => dispatch(getProducts()).unwrap(),
     fetchProductsByCategory: async (id: number) =>
       dispatch(getProductByCategory(id)).unwrap(),
     fetchProductById: async (id: number) =>

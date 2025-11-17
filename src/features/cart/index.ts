@@ -1,10 +1,9 @@
 import type { CartState } from "@/types/CartTyps";
-import { load, save } from "@/utils/storage";
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: CartState = {
-  //persist
-  items: load('cart') ? JSON.parse(load('cart')!) : []
+  items: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')!) : []
 };
 
 export const cartSlice = createSlice({
@@ -20,14 +19,11 @@ export const cartSlice = createSlice({
         state.items[indexProductId].quantity += quantity;
       } else {
         state.items.push({ productId, quantity });
-        
       }
-      save('cart', state.items)
     },
     removeFromCart(state, action) {
       const { productId } = action.payload;
       state.items = state.items.filter((item) => item.productId !== productId);
-      save('cart', state.items)
     },
   },
 });

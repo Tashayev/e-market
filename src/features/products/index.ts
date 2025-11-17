@@ -41,9 +41,9 @@ export const productSlice = createSlice({
       .addCase(getCategoryById.fulfilled, (state, action) => {        
         state.categories = action.payload;
       })
-      // .addCase(getProducts.fulfilled, (state, action) => {
-      //   state.products = action.payload;
-      // })
+      .addCase(getProducts.fulfilled, (state, action) => {
+        state.products = action.payload;
+      })
       .addCase(getProducts.pending, (state) => {
         state.isLoading = true;
       })
