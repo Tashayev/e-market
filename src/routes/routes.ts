@@ -6,22 +6,22 @@ import RegisterPage from "@/pages/auth/register/RegisterPage";
 import { ProfilePage } from "@/pages/profile/ProfilePage";
 import CategoryPage from "@/pages/products/category/CategoryPage";
 import ProductDeitalsPage from "@/pages/products/products-deitals/ProductDeitalsPage";
-import BucketPage from "@/pages/bucket/BucketPage";
+
 import AdminPage from "@/pages/admin/AdminPage";
 import AdminCategoriesPage from "@/pages/admin/adminCategoriesPage/AdminCategoriesPage";
 import AdminProductsPage from "@/pages/admin/adminProductsPage/AdminProductsPage";
 import { AdminRoute } from "./AdminRoute";
+import CartPage from "@/pages/cart/CartPage";
 
 export const router = createBrowserRouter([
-   {
+  {
     path: "/admin",
     Component: AdminRoute,
-    children:[
-      {index: true, Component: AdminPage},
+    children: [
+      { index: true, Component: AdminPage },
       { path: "categories", Component: AdminCategoriesPage },
-      { path: "products", Component: AdminProductsPage },      
-    ]
-
+      { path: "products", Component: AdminProductsPage },
+    ],
   },
   {
     path: "/",
@@ -29,13 +29,12 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: DashboardPage },
       { path: "profile", Component: ProfilePage },
-      
       { path: "category/:id", Component: CategoryPage },
       { path: "product/:id", Component: ProductDeitalsPage },
-      { path: "bucket", Component: BucketPage },
+      { path: "cart", Component: CartPage },
     ],
   },
- 
+
   { path: "auth/login", Component: LoginPage },
   { path: "auth/registration", Component: RegisterPage },
 ]);

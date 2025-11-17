@@ -1,7 +1,7 @@
 import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
 
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 
 import type {
   AvailabelUser,

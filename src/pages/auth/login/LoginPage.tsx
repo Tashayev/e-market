@@ -2,9 +2,9 @@ import { useUser } from "@/features/auth/user/useUser";
 import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { style } from "../auth";
-
+import { toast } from "react-toastify";
 export const LoginPage = () => {
-  const { loginUser, availabelUser,  } = useUser();
+  const { loginUser, availabelUser } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("");
@@ -16,21 +16,21 @@ export const LoginPage = () => {
     e.preventDefault();
     try {
       const isExist = await availabelUser({ email });
-      
+
       if (!isExist) {
-        alert("User does not exist");
+        toast.error("User does not exist");
         return;
       }
       const user = await loginUser({ email, password });
-      if (user.role === 'admin') {
+      if (user.role === "admin") {
         navigate("/admin/categories");
+        toast.success("Login successful!");
         return;
       }
-
       navigate(from, { replace: true });
+      toast.success("Login successful!");
     } catch (e) {
-      console.log(e);
-      alert("Auth error");
+      toast.error("Auth error: " + e);
     }
   };
 
@@ -45,7 +45,6 @@ export const LoginPage = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required
-          
         />
 
         <input
@@ -63,7 +62,12 @@ export const LoginPage = () => {
           Registration
         </NavLink>
       </form>
-      <p>You can find users to enter <a target="_blank" href='https://api.escuelajs.co/api/v1/users'>here</a></p>
+      <p>
+        You can find users to enter{" "}
+        <a target="_blank" href="https://api.escuelajs.co/api/v1/users">
+          here
+        </a>
+      </p>
     </div>
   );
 };

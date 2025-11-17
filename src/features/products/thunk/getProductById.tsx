@@ -1,6 +1,6 @@
 import type { Product } from "@/types/Products";
  import { createAsyncThunk } from "@reduxjs/toolkit";
- import baseService from "@/init/baseService";
+ import baseService from "@/features/init/baseService";
 
 export const getProductById = createAsyncThunk<Product, number>(
   "product/getProductById", 

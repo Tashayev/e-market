@@ -1,3 +1,5 @@
+
+
 export const  style = {
  card:{
   padding: '10px',
@@ -6,6 +8,18 @@ export const  style = {
   flexDirection: 'column',
   backgroundColor: "gray",
   maxWidth: '240px',
+  
+  color: '#fff'
+ },
+ btns:{
+  display:'flex',
+  justifyContent:'space-between',
+  
+ },
+ text:{
+  color: '#fff'
+ },
+ icon:{
   cursor: 'pointer'
  }
 }as const

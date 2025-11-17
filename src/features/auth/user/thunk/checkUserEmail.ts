@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 import type { AvailabelUser } from "@/types/UserTypes";
 
 export const checkUserEmail = createAsyncThunk<boolean, AvailabelUser>(

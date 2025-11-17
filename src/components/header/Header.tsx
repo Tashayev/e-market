@@ -1,38 +1,33 @@
-import {  Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { style } from "./headerStyle";
 import { useUser } from "@/features/auth/user/useUser";
-import { Button } from "@mui/material";
+import { Avatar, Box, Button } from "@mui/material";
 import useIsMobile from "@/tools/hooks/useIsMobile";
 import type { ToggleSidebarProp } from "@/types/LayoutProps";
+import { useCarts } from "@/features/cart/useCart";
 
 export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
   const { user, logout } = useUser();
-  
-
+  const {cart} =useCarts();
   const isMobile = useIsMobile();
 
   return (
-    <div style={style.header}>
+    <Box style={style.header}>
       {isMobile && (
         <Button onClick={handleToggleSidebar}>
           <Menu color="#ffffff" />
         </Button>
       )}
+      <Box style={style.shopCart}>
+        <ShoppingCart />
+        <span style={style.span}>{cart.length}</span>
+      </Box>
 
-      <img
+      <Avatar
         src={user?.avatar}
-        alt="User avatar"
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: "50%",
-          objectFit: "cover",
-        }}
+        alt="User avatar"        
       />
-
-     
-
-      <button onClick={logout}>Log out</button>
-    </div>
+      <Button onClick={()=>logout()} variant="contained" color="primary">Log out</Button>
+    </Box>
   );
 }

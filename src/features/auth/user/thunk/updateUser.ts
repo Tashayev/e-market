@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 import type { UpdateUser } from "@/types/UserTypes";
+import { toast } from "react-toastify";
 
 
 export const updateUser = createAsyncThunk(
@@ -10,7 +11,7 @@ export const updateUser = createAsyncThunk(
       const response = await baseService.put(`/users/${data.id}`, data); 
       return response.data;
     } catch (e: any) {
-      console.error("Registration error:", e.response?.data || e.message);
+      toast.error("Registration error: " + e.response?.data || e.message);
       return thunkAPI.rejectWithValue(e.response?.data || e.message);
     }
   }

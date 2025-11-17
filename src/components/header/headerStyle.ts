@@ -2,7 +2,7 @@
 
 export const style = {
   header:{
-    backgroundColor: '#0a80a3',
+    backgroundColor: '#f6f6f6',
     padding: '10px 20px 10px',
     width: '100%',
     display: 'flex',
@@ -14,5 +14,19 @@ export const style = {
     gap: '10px',
     color: '#fff' ,
     zIndex:'200'   
+  },
+  shopCart:{
+    marginRight:'10px',
+    position: 'relative'
+  },
+  span:{
+    position: 'absolute',
+    borderRadius: '999px',
+    padding: '0 6px',
+    backgroundColor: 'red',
+    fontSize: '14px',
+    bottom: '15px',
+    right:'-12px'
+
   }
 }as const

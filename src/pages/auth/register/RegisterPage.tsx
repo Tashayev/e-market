@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { style } from "../auth";
 import { useUser } from "@/features/auth/user/useUser";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -18,16 +19,15 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       const isAvailable = await availabelUser({ email });
-
       if (!isAvailable) {
         await register({ name, email, password, avatar });
         navigate(from, { replace: true });
+        toast.success("Registration successful!")
       } else {
-        alert(`The email ${email} already exists`);
+        toast.error(`The email ${email} already exists`);
       }
-    } catch (error) {
-      console.error(error);
-      alert("Error during registration");
+    } catch (error) {      
+      toast.error("Error during registration: " + error);
     }
   };
 

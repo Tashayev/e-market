@@ -4,6 +4,7 @@ import "./index.css";
 import { useUser } from "./features/auth/user/useUser.ts";
 import { useEffect, useState } from "react";
 import { load } from "./utils/storage.ts";
+import { toast, ToastContainer } from "react-toastify";
 
 function App() {
   const { getUser } = useUser();
@@ -18,7 +19,7 @@ function App() {
       try {
         await getUser();
       } catch (e) {
-        console.error("Failed to load user:", e);
+        toast.error("Failed to load user: "+ e);
       } finally {
         setInitialized(true);
       }
@@ -28,7 +29,13 @@ function App() {
   if (!initialized) {
     return <div>Loading...</div>;
   }
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
+  )
+
 }
 
 export default App;

@@ -7,15 +7,12 @@ import { useState, useEffect } from "react";
 import useIsMobile from "@/tools/hooks/useIsMobile";
 
 export const ProtectedRoute = () => {
+  
   const { user } = useUser();
-  if (!user) return <Navigate to="/auth/login" replace />;
 
   const isMobile = useIsMobile();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleToggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (isMobile) {
@@ -25,13 +22,20 @@ export const ProtectedRoute = () => {
     }
   }, [isMobile]);
 
+  if (!user) return <Navigate to="/auth/login" replace />;
+
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
   return (
     <>
       <Header handleToggleSidebar={handleToggleSidebar} />
 
       <div style={style.container}>
         {isSidebarOpen && (
-          <div style={{
+          <div
+            style={{
               position: isMobile ? "fixed" : "relative",
               top: 0,
               left: 0,
@@ -41,8 +45,9 @@ export const ProtectedRoute = () => {
               boxShadow: isMobile ? "2px 0 8px rgba(0,0,0,0.3)" : "none",
               zIndex: isMobile ? 1001 : "auto",
               transition: "transform 0.3s ease",
-            }}>
-            <Sidebar handleToggleSidebar={handleToggleSidebar}/>
+            }}
+          >
+            <Sidebar handleToggleSidebar={handleToggleSidebar} />
           </div>
         )}
 

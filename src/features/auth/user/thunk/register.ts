@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 import type { RegisterForm } from "@/types/UserTypes";
+import { toast } from "react-toastify";
 
 export const registerUser = createAsyncThunk(
   "user/registerUser",
@@ -9,7 +10,7 @@ export const registerUser = createAsyncThunk(
       const response = await baseService.post("/users/", data); 
       return response.data;
     } catch (e: any) {
-      console.error("Registration error:", e.response?.data || e.message);
+      toast.error("Registration error: " + e.response?.data || e.message);
       return thunkAPI.rejectWithValue(e.response?.data || e.message);
     }
   }

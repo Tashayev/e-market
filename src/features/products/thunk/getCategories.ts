@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 import type { Categories } from "@/types/Products";
 
 export const getCategories = createAsyncThunk<Categories[]>(

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 
 export const deleteCategory = createAsyncThunk(
   "product/deleteCategory",

@@ -1,5 +1,4 @@
 import { useDispatch } from "@/tools/hooks/useDispatch";
-
 import { getCategories } from "./thunk/getCategories";
 import { useSelector } from "@/tools/hooks/useSelector";
 import { getProductByCategory } from "./thunk/getProductByCategory";

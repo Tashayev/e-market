@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 
 export default function AdminCategoriesPage() {
   const { categories, fetchCategories } = useProducts();
+
   const [isListOpen, setIsListOpen] = useState(false);  
   const [selectedCategory, setSelectedCategory] = useState<Categories | null>(null);
   useEffect(() => {
     fetchCategories();
   }, []);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement>,
     category: Categories

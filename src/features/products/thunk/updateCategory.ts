@@ -1,4 +1,4 @@
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 import type { UpdateCategory } from "@/types/Products";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 

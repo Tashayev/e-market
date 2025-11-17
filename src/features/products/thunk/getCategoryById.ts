@@ -1,4 +1,4 @@
-import baseService from "@/init/baseService";
+import baseService from "@/features/init/baseService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getCategoryById = createAsyncThunk(

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 
 
 export const load = (key: string) => 
@@ -23,6 +24,6 @@ export function remove(key: string): void {
     localStorage.removeItem(key);
   } catch (err) {
     
-    console.log(err)
+    toast.error(`Error: ${err}`)
   }
 }

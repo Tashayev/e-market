@@ -19,7 +19,7 @@ export default function Sidebar({handleToggleSidebar}:ToggleSidebarProp) {
   const sidebarData = [
     { name: "Main page", id: 4, navigator: "/" },    
     { name: "Profile", id: 2, navigator: "/profile" },
-    { name: "Bucket", id: 3, navigator: "/bucket" },
+    { name: "Cart", id: 3, navigator: "/cart" },
   ];
   return (
     <Box sx={{ width: 250 }}>
