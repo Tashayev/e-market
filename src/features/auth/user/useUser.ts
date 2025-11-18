@@ -19,6 +19,7 @@ import { registerUser } from "./thunk/register";
 import { checkUserEmail } from "./thunk/checkUserEmail";
 
 import { updateUser } from "./thunk/updateUser";
+import { useCallback, useMemo } from "react";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -27,32 +28,72 @@ export const useUser = () => {
   const isAdmin = useSelector(({ user }) => user.isAdmin);
   const isLoading = useSelector(({ user }) => user.isLoading);
   const user = useSelector(({ user }) => user.user);
-  const logout = () => {
+
+  const memoizedUser = useMemo(() => user, [user]);
+
+  const logoutAction = useCallback(() => {
     dispatch(userActions.removeUserDetails());
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     delete baseService.defaults.headers.common[authHeader];
-  };
+  }, [dispatch]);
 
-  const login = async (loginData: LoginRequest) => {
-    await dispatch(loginUser(loginData)).unwrap();
-    const user = await dispatch(getUser()).unwrap();
-    return user;
-  };
+  const loginAction = useCallback(
+    async (loginData: LoginRequest) => {
+      await dispatch(loginUser(loginData)).unwrap();
+      const user = await dispatch(getUser()).unwrap();
+      return user;
+    },
+    [dispatch]
+  );
 
-  return {
-    logout,
-    isAuthenticated,
-    isAdmin,
-    isLoading,
-    user,
-    loginUser: login,
-    getUser: async () => dispatch(getUser()).unwrap(),
-    register: async (data: RegisterForm) =>
-      dispatch(registerUser(data)).unwrap(),
-    availabelUser: async (data: AvailabelUser) =>
-      dispatch(checkUserEmail(data)).unwrap(),
-    updateUser: async (data: UpdateUser) =>
-      dispatch(updateUser(data)).unwrap(),
-  };
+  const getUserAction = useCallback(
+    async () => dispatch(getUser()).unwrap(),
+    [dispatch]
+  );
+
+  const registerAction = useCallback(
+    async (data: RegisterForm) => dispatch(registerUser(data)).unwrap(),
+    [dispatch]
+  );
+
+  const availabelUserAction = useCallback(
+    async (data: AvailabelUser) => dispatch(checkUserEmail(data)).unwrap(),
+    [dispatch]
+  );
+
+  const updateUserAction = useCallback(
+    async (data: UpdateUser) => dispatch(updateUser(data)).unwrap(),
+    [dispatch]
+  );
+
+  return useMemo(
+    () => ({
+      // State
+      isAuthenticated,
+      isAdmin,
+      isLoading,
+      user: memoizedUser,
+
+      // Actions
+      logout: logoutAction,
+      loginUser: loginAction,
+      getUser: getUserAction,
+      register: registerAction,
+      availabelUser: availabelUserAction,
+      updateUser: updateUserAction,
+    }),
+    [
+      isAuthenticated,
+      isAdmin,
+      isLoading,
+      memoizedUser,
+      logoutAction,
+      loginAction,
+      getUserAction,
+      registerAction,
+      availabelUserAction,
+      updateUserAction,
+    ]
+  );
 };

@@ -25,6 +25,7 @@ export interface ProductState {
   products: Product[]; 
   categories: Categories[]; 
   productById: Product | null
+  //categoryById:
   
 }
 export interface ProductTypeCard{

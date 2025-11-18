@@ -35,11 +35,11 @@ export const LoginPage = () => {
   };
 
   return (
-    <div style={style.container}>
+    <div className=" flex justify-center">
       <form onSubmit={handleLogin} style={style.form}>
         <h2>Log in</h2>
         <input
-          style={style.input}
+          
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -48,7 +48,7 @@ export const LoginPage = () => {
         />
 
         <input
-          style={style.input}
+          className="mb-0"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -57,7 +57,7 @@ export const LoginPage = () => {
           current-password="true"
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" className="bg-primary-900">Login</button>
         <NavLink to="/auth/registration" end>
           Registration
         </NavLink>
