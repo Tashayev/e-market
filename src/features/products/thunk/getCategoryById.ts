@@ -1,5 +1,7 @@
-import baseService from "@/features/init/baseService";
+//redux
 import { createAsyncThunk } from "@reduxjs/toolkit";
+//base url
+import baseService from "@/features/init/baseService";
 
 export const getCategoryById = createAsyncThunk(
   'product/getCategoryById',

@@ -1,3 +1,4 @@
+//types
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { User, UserState } from "@/types/UserTypes";
 

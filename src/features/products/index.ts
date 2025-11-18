@@ -1,8 +1,11 @@
+//redux
 import { createSlice } from "@reduxjs/toolkit";
-
+//types
 import type { ProductState } from "@/types/Products";
+//reducers
 import { extraReducers } from "./thunk/extraReducer";
 import * as reducers from "./reducers";
+
 const initialState: ProductState = {
   isLoading: false,
   categories: [],
@@ -14,7 +17,7 @@ export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers,
-  extraReducers
+  extraReducers,
 });
 
 export const productActions = productSlice.actions;

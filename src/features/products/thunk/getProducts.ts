@@ -1,6 +1,9 @@
-import baseService from "@/features/init/baseService";
-import type { Product } from "@/types/Products";
+//redux
 import { createAsyncThunk } from "@reduxjs/toolkit";
+//base url
+import baseService from "@/features/init/baseService";
+//types
+import type { Product } from "@/types/Products";
 
 export const getProducts = createAsyncThunk<Product[]>(
   "product/getProducts",

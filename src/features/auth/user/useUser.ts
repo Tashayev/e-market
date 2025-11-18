@@ -1,25 +1,24 @@
+//react
+import { useCallback, useMemo } from "react";
+//base url
+import baseService from "@/features/init/baseService";
+//hooks
 import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
-
-import baseService from "@/features/init/baseService";
-
+//types
 import type {
   AvailabelUser,
   LoginRequest,
   RegisterForm,
   UpdateUser,
 } from "@/types/UserTypes";
-
+//thunks
 import { getUser } from "./thunk/getUser";
-
 import { loginUser } from "./thunk/login";
 import { userActions } from ".";
 import { registerUser } from "./thunk/register";
-
 import { checkUserEmail } from "./thunk/checkUserEmail";
-
 import { updateUser } from "./thunk/updateUser";
-import { useCallback, useMemo } from "react";
 
 export const useUser = () => {
   const dispatch = useDispatch();

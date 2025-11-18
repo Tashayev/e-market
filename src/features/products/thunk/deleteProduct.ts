@@ -1,4 +1,6 @@
+//redux
 import { createAsyncThunk } from "@reduxjs/toolkit";
+//base url
 import baseService from "@/features/init/baseService";
 
 export const deleteProduct = createAsyncThunk(
@@ -6,7 +8,7 @@ export const deleteProduct = createAsyncThunk(
   async (productId: number, thunkAPI) => {
     try {
       await baseService.delete(`/products/${productId}`);
-      return productId; 
+      return productId;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e.response?.data);
     }

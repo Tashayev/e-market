@@ -1,8 +1,10 @@
+//redux
 import { createSlice } from "@reduxjs/toolkit";
-import * as reducers from "./reducers";
+//types
 import type { UserState } from "@/types/UserTypes";
+//reducers
+import * as reducers from "./reducers";
 import { extraReducers } from "./thunk/extraReducer";
-
 
 const hasToken = !!localStorage.getItem("accessToken");
 
@@ -10,14 +12,14 @@ const initialState: UserState = {
   isLoading: false,
   user: null,
   isAuthenticated: hasToken,
-  isAdmin: false
+  isAdmin: false,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers,
-  extraReducers
+  extraReducers,
 });
 
 export const userActions = userSlice.actions;

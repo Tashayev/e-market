@@ -1,9 +1,14 @@
-import type { CartState } from "@/types/CartTyps";
+//redux
 import { createSlice } from "@reduxjs/toolkit";
+//types
+import type { CartState } from "@/types/CartTyps";
+//reducers
 import * as reducers from "./reducers";
 
 const initialState: CartState = {
-  items: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')!) : []
+  items: localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart")!)
+    : [],
 };
 
 export const cartSlice = createSlice({

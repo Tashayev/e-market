@@ -1,11 +1,13 @@
+//axios
+import axios from "axios";
+//toast
+import { toast } from "react-toastify";
+//redux store
 import { postRefreshToken } from "@/features/auth/user/thunk/postRefreshToken";
 import { store } from "@/features/store/store";
-// import { remove } from "@/utils/storage";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const baseService = axios.create({
-  baseURL: "https://api.escuelajs.co/api/v1"  
+  baseURL: "https://api.escuelajs.co/api/v1",
 });
 
 const ACCESS_TOKEN_KEY = "accessToken";
