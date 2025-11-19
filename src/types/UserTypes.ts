@@ -6,8 +6,8 @@ export interface User {
   role: string;
   avatar: string;
 }
-export interface Users{
-  users: User[]
+export interface Users {
+  users: User[];
 }
 export interface User {
   id: number;
@@ -22,33 +22,8 @@ export interface UserState {
   isAuthenticated: boolean;
 }
 
-export interface LoginRequest {
+export interface UpdateUser {
   email: string;
-  password: string;
-}
-
-export interface RegisterForm {
   name: string;
-  email: string;
-  password: string;
-  avatar: string
-}
-export interface UpdateUser{
-  email: string,
-  name: string,
-  id: number
-}
-
-export interface FindUserForm {
   id: number;
 }
-
-export interface AvailabelUser{
-  email: string
-}
-export interface Token{
-  refresh_token: string,
-  access_token: string,
-
-}
-

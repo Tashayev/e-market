@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { Input } from "@mui/material";
+import { Box, Input, Typography } from "@mui/material";
 
 type TextFieldProps = {
   name: string;
@@ -30,8 +30,7 @@ export const TextField: FC<TextFieldProps> = (props) => {
       defaultValue={defaultValue}
       rules={rules}
       render={({ field, fieldState: { error } }) => (
-        <div className="mb-4">
-          
+        <Box className="mb-4">          
           <Input
             {...field}
             type={type}
@@ -41,9 +40,9 @@ export const TextField: FC<TextFieldProps> = (props) => {
             }`}
           />
           {error && (
-            <p className="text-error-500 text-sm mt-1">{error.message}</p>
+            <Typography className="text-error-500 text-sm mt-1">{error.message}</Typography>
           )}
-        </div>
+        </Box>
       )}
     />
   );

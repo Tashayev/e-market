@@ -1,10 +1,12 @@
 import { RouterProvider } from "react-router";
-import { router } from "./routes/routes.ts";
+
 import "./index.css";
 import { useUser } from "./features/auth/user/useUser.ts";
 import { useEffect, useState } from "react";
 
 import { toast, ToastContainer } from "react-toastify";
+import { router } from "./routes/Routes.tsx";
+
 
 function App() {
   const { getUser } = useUser();

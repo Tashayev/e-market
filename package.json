@@ -17,7 +17,6 @@
     "@mui/material": "^7.3.5",
     "@mui/x-tree-view": "^8.17.0",
     "@reduxjs/toolkit": "^2.9.2",
-    "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.1",
     "lucide": "^0.552.0",
     "lucide-react": "^0.552.0",
@@ -28,7 +27,6 @@
     "react-router": "^7.9.5",
     "react-router-dom": "^7.9.5",
     "react-toastify": "^11.0.5",
-    "tailwindcss": "^4.1.17",
     "yup": "^1.7.1",
     "yup-schema": "^1.0.0-alpha.2"
   },
