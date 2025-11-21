@@ -12,6 +12,7 @@ const initialState: ProductState = {
   products: [],
   productById: null,
   searchResults: [],
+  error: null,
 };
 
 export const productSlice = createSlice({

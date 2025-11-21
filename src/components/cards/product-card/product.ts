@@ -9,6 +9,7 @@ export const productSx: Record<string, SxProps<Theme>> = {
       transform: "translateY(-4px)",
       boxShadow: 4,
     },
+    width: "100%",
   },
   CardContent: { padding: 2 },
   CardActions: { padding: 2, paddingTop: 0, display: "flex", alignItems: 'end'},

@@ -7,26 +7,27 @@ export interface Categories{
   updatedAt: string
 }
 
-export interface Product{ 
-    id: number,
-    title: string,
-    slug: string,
-    price: number,
-    description: string
-    category: Categories,
-    images: string[],
-    creationAt: string,
-    updatedAt: string  
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  images: string[];
 }
-
 
 export interface ProductState {
   isLoading: boolean;
-  products: Product[]; 
-  categories: Categories[]; 
-  productById: Product | null
+  error: string | null;
+  categories: Categories[];
+  products: Product[];
+  productById: Product | null;
   searchResults: Product[];
-  
+}
+
+
+export interface SetLoadingPayload {
+  isLoading: boolean;
 }
 export interface ProductTypeCard{
   title: string;

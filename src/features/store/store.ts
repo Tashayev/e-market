@@ -9,7 +9,8 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     product: productReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware) 

@@ -13,7 +13,7 @@ export default function AdminHeader({
   const isMobile = useIsMobile();
 
   return (
-    <Box sx={headerSx.Box}>
+    <Box sx={headerSx.BoxAdmin}>
       {isMobile && (
         <Button onClick={handleToggleAdminSidebar}>
           <Menu color="#ffffff" />

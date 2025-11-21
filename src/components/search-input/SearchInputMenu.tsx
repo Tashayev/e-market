@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Settings2 } from "lucide-react";
+import { Box } from "@mui/material";
 
 export default function SearchInputMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -15,7 +16,7 @@ export default function SearchInputMenu() {
   };
 
   return (
-    <div>
+    <Box>
       <Button
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -25,11 +26,16 @@ export default function SearchInputMenu() {
         sx={{
           "&:focus": {
             outline: "none",
-          },          
-         
+          }, 
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
+         minWidth: 0,        
+         px: 0,  
+         margin: 0,
         }}
       >
-        <Settings2 style={{ color: "black" }} />
+        <Settings2 style={{ color: "black",  }} />
       </Button>
       <Menu
         id="basic-menu"
@@ -46,6 +52,6 @@ export default function SearchInputMenu() {
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
-    </div>
+    </Box>
   );
 }

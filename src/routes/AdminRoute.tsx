@@ -5,11 +5,11 @@ import AdminHeader from "@/components/header/admin-header/AdminHeader";
 import AdminSidebar from "@/components/sidebar/admin-sidebar/AdminSidbar";
 import { useState, useEffect } from "react";
 import useIsMobile from "@/tools/hooks/useIsMobile";
+import { Box } from "@mui/material";
 
 export const AdminRoute = () => {
   const { user, isAdmin, isAuthenticated } = useUser();
 
-  
   if (!user) return <Navigate to="/auth" replace />;
   else if (isAuthenticated && !isAdmin) return <Navigate to="/" replace />;
 
@@ -20,7 +20,6 @@ export const AdminRoute = () => {
     setIsAdminSidebarOpen((prev) => !prev);
   };
 
-  
   useEffect(() => {
     if (isMobile) setIsAdminSidebarOpen(false);
     else setIsAdminSidebarOpen(true);
@@ -30,11 +29,10 @@ export const AdminRoute = () => {
     <>
       <AdminHeader handleToggleAdminSidebar={handleToggleAdminSidebar} />
 
-      <div style={style.container}>
-        
+      <Box style={style.container}>
         {isAdminSidebarOpen && (
-          <div
-            style={{
+          <Box
+            sx={{
               position: isMobile ? "fixed" : "relative",
               top: 0,
               left: 0,
@@ -46,15 +44,14 @@ export const AdminRoute = () => {
               transition: "transform 0.3s ease",
             }}
           >
-            <AdminSidebar handleToggleAdminSidebar={handleToggleAdminSidebar}/>
-          </div>
+            <AdminSidebar handleToggleAdminSidebar={handleToggleAdminSidebar} />
+          </Box>
         )}
 
-        
         {isMobile && isAdminSidebarOpen && (
-          <div
+          <Box
             onClick={handleToggleAdminSidebar}
-            style={{
+            sx={{
               position: "fixed",
               top: 0,
               left: 0,
@@ -66,11 +63,10 @@ export const AdminRoute = () => {
           />
         )}
 
-        
-        <div style={style.div}>
+        <Box sx={style.div}>
           <Outlet />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 };

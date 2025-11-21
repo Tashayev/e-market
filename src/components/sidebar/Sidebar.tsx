@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { X } from "lucide-react";
 
 import { NavLink } from "react-router";
+import { sidebarSx } from "./sidebarStyle";
 
 export default function Sidebar({handleToggleSidebar}:ToggleSidebarProp) {
   const isMobile = useIsMobile()
@@ -22,8 +23,9 @@ export default function Sidebar({handleToggleSidebar}:ToggleSidebarProp) {
     { name: "Cart", id: 3, navigator: "/cart" },
   ];
   return (
-    <Box sx={{ width: 250 }}>
-      <List>
+    <Box sx={sidebarSx.Box}>
+      <Box sx={sidebarSx.Container}>
+        <List>
       {isMobile && <Button onClick={handleToggleSidebar}><X/></Button>}
 
         {sidebarData.map((c) => (
@@ -50,6 +52,7 @@ export default function Sidebar({handleToggleSidebar}:ToggleSidebarProp) {
           </ListItem>
         </List>
       )}
+      </Box>
     </Box>
   );
 }
