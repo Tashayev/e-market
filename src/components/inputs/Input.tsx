@@ -1,22 +1,37 @@
-import { Input } from "@mui/material";
-interface TextInputTypes{
-  placeholder: string,
-  type: string
+import { TextField } from "@mui/material";
+interface TextInputTypes {
+  placeholder: string;
+  type: string;
+  error?: boolean | undefined;
+  helperText?: React.ReactNode;
 }
-export const TextInput = ({ placeholder, type, ...props }:TextInputTypes) => {
+export const TextInput = ({
+  placeholder,
+  type,
+  error,
+  helperText,
+  ...props
+}: TextInputTypes) => {
   return (
-    <Input      
+    <TextField
       {...props}
-      placeholder={placeholder}
       type={type}
+      placeholder={placeholder}
+      fullWidth
+      error={error}
+      helperText={helperText}
       sx={{
-        py: "11px",
-        px: "20px",
+        border: "none",
         borderRadius: "10px",
         outline: "none",
         backgroundColor: "#F6F7F9",
+        px: "10px",
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            border: "none",
+          },
+        },
       }}
-      disableUnderline={true}
     />
   );
 };

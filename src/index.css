@@ -8,7 +8,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafeff;
+  background-color: #F6F7F9;
 }
 input{
   background-color: #F6F7F9;
@@ -68,5 +68,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
+button .Mui-focused{
+  outline: none;
+}
 

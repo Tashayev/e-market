@@ -14,6 +14,7 @@ import { deleteCategory } from "./deleteCategory";
 import { deleteProduct } from "./deleteProduct";
 import { updateProduct } from "./updateProduct";
 import { createProduct } from "./createProduct";
+import { searchProductsByTitle } from "./searchProductByTitle";
 
 export const extraReducers = (
   builder: ActionReducerMapBuilder<ProductState>
@@ -29,7 +30,8 @@ export const extraReducers = (
       deleteCategory.pending,
       deleteProduct.pending,
       updateProduct.pending,
-      createProduct.pending
+      createProduct.pending,
+      searchProductsByTitle.pending
     ),
     (state) => {
       state.isLoading = true;
@@ -57,7 +59,9 @@ export const extraReducers = (
       updateProduct.fulfilled,
       updateProduct.rejected,
       createProduct.fulfilled,
-      createProduct.rejected
+      createProduct.rejected,
+      searchProductsByTitle.fulfilled,
+      searchProductsByTitle.rejected
     ),
     (state) => {
       state.isLoading = false;
@@ -110,6 +114,12 @@ export const extraReducers = (
       product.id === updatedProduct.id ? updatedProduct : product
     );
   });
+  builder.addMatcher(
+    isAnyOf(searchProductsByTitle.fulfilled),
+    (state, action) => {
+      state.searchResults = action.payload;
+    }
+  );
 
   builder.addMatcher(isAnyOf(createProduct.fulfilled), (state, action) => {
     state.products = [...state.products, action.payload];

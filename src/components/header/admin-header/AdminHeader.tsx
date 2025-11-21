@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
-import { style } from "../headerStyle";
+import { headerSx } from "../headerSx";
 import { useUser } from "@/features/auth/user/useUser";
-import { Button, Typography } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import useIsMobile from "@/tools/hooks/useIsMobile";
 import type { ToggleAdminSidebarProp } from "@/types/LayoutProps";
 
@@ -13,7 +13,7 @@ export default function AdminHeader({
   const isMobile = useIsMobile();
 
   return (
-    <div style={style.header}>
+    <Box sx={headerSx.Box}>
       {isMobile && (
         <Button onClick={handleToggleAdminSidebar}>
           <Menu color="#ffffff" />
@@ -21,10 +21,10 @@ export default function AdminHeader({
       )}
       <Typography>Admin Panel</Typography>
 
-      <img
+      <Avatar
         src={user?.avatar}
         alt="User avatar"
-        style={{
+        sx={{
           width: 40,
           height: 40,
           borderRadius: "50%",
@@ -33,6 +33,6 @@ export default function AdminHeader({
       />
 
       <button onClick={logout}>Log out</button>
-    </div>
+    </Box>
   );
 }

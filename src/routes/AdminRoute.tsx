@@ -10,7 +10,7 @@ export const AdminRoute = () => {
   const { user, isAdmin, isAuthenticated } = useUser();
 
   
-  if (!user) return <Navigate to="/auth/login" replace />;
+  if (!user) return <Navigate to="/auth" replace />;
   else if (isAuthenticated && !isAdmin) return <Navigate to="/" replace />;
 
   const isMobile = useIsMobile();

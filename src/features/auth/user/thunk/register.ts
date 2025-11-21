@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 //base url
 import baseService from "@/features/init/baseService";
 //types
-import type { RegisterForm } from "@/types/UserTypes";
+import type { RegisterForm } from "@/types/AuthTypes";
 //toast
 import { toast } from "react-toastify";
 

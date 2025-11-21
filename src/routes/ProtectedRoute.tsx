@@ -22,7 +22,7 @@ export const ProtectedRoute = () => {
     }
   }, [isMobile]);
 
-  if (!user) return <Navigate to="/auth/login" replace />;
+  if (!user) return <Navigate to="/auth" replace />;
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);

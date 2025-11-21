@@ -10,8 +10,10 @@ import AdminCategoriesPage from "@/pages/admin/adminCategoriesPage/AdminCategori
 import AdminProductsPage from "@/pages/admin/adminProductsPage/AdminProductsPage";
 import { AdminRoute } from "./AdminRoute";
 import CartPage from "@/pages/cart/CartPage";
+import SearchPage from "@/pages/search/SearchPage";
 
 export const router = createBrowserRouter([
+  //admin routes
   {
     path: "/admin",
     Component: AdminRoute,
@@ -21,6 +23,7 @@ export const router = createBrowserRouter([
       { path: "products", Component: AdminProductsPage },
     ],
   },
+  //customer routes
   {
     path: "/",
     Component: ProtectedRoute,
@@ -30,26 +33,26 @@ export const router = createBrowserRouter([
       { path: "category/:id", Component: CategoryPage },
       { path: "product/:id", Component: ProductDeitalsPage },
       { path: "cart", Component: CartPage },
+      { path: "search", Component: SearchPage },
     ],
   },
-  // Единый маршрут аутентификации
-  { 
-    path: "/auth", 
-    Component: AuthPage 
+  //not authenticated routes
+  {
+    path: "/auth",
+    Component: AuthPage,
   },
-  // Можно оставить редиректы для обратной совместимости
-  { 
-    path: "/auth/login", 
+  {
+    path: "/auth/login",
     loader: () => {
-      window.location.href = '/auth';
+      window.location.href = "/auth";
       return null;
-    }
+    },
   },
-  { 
-    path: "/auth/registration", 
+  {
+    path: "/auth/registration",
     loader: () => {
-      window.location.href = '/auth';
+      window.location.href = "/auth";
       return null;
-    }
+    },
   },
 ]);

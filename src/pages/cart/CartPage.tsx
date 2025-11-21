@@ -1,4 +1,4 @@
-import CartCard from "@/components/cards/category-cards/cart-cards/CartCard";
+import CartCard from "@/components/cards/cart-cards/CartCard";
 import { useCarts } from "@/features/cart/useCart";
 import { Box, Grid, Typography } from "@mui/material";
 

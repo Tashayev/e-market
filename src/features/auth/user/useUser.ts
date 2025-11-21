@@ -6,12 +6,8 @@ import baseService from "@/features/init/baseService";
 import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
 //types
-import type {
-  AvailabelUser,
-  LoginRequest,
-  RegisterForm,
-  UpdateUser,
-} from "@/types/UserTypes";
+import type { UpdateUser } from "@/types/UserTypes";
+import type { LoginForm, RegisterForm, AvailabelUser } from "@/types/AuthTypes";
 //thunks
 import { getUser } from "./thunk/getUser";
 import { loginUser } from "./thunk/login";
@@ -21,8 +17,10 @@ import { checkUserEmail } from "./thunk/checkUserEmail";
 import { updateUser } from "./thunk/updateUser";
 
 export const useUser = () => {
-  const dispatch = useDispatch();
+  
   const authHeader = "Authorization";
+  
+  const dispatch = useDispatch();  
   const isAuthenticated = useSelector(({ user }) => user.isAuthenticated);
   const isAdmin = useSelector(({ user }) => user.isAdmin);
   const isLoading = useSelector(({ user }) => user.isLoading);
@@ -38,7 +36,7 @@ export const useUser = () => {
   }, [dispatch]);
 
   const loginAction = useCallback(
-    async (loginData: LoginRequest) => {
+    async (loginData: LoginForm) => {
       await dispatch(loginUser(loginData)).unwrap();
       const user = await dispatch(getUser()).unwrap();
       return user;
