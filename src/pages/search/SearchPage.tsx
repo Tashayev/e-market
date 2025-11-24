@@ -6,17 +6,27 @@ import { useSearchParams } from "react-router";
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
-  const {fetchSearchProductsByTitle, searchResults} = useProductSearch();
+  const query = searchParams.get("query") || "";
+  const { fetchSearchProductsByTitle, searchResults, isLoading, error } = useProductSearch();
   const toLowerCaseQuery = query.toLowerCase();
-  useEffect(()=>{
+  useEffect(() => {
     fetchSearchProductsByTitle(toLowerCaseQuery);
-   },[toLowerCaseQuery])
+  }, [toLowerCaseQuery]);
   return (
     <Box>
-      {searchResults.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {isLoading ? (
+        <Box>Loading...</Box>
+      ) : error ? (
+        <Box>Error: {error}</Box> 
+      ) : searchResults.length === 0 ? (
+        <Box>No products found</Box>
+      ) : (
+        searchResults.map((product) => (
+          <Box key={product.id} mb={2}>
+            <ProductCard product={product} />
+          </Box>
+        ))
+      )}
     </Box>
-  )
+  );
 }

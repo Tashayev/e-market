@@ -3,18 +3,18 @@ import { type ActionReducerMapBuilder, isAnyOf } from "@reduxjs/toolkit";
 //types
 import type { ProductState } from "@/types/Products";
 //thunks
-import { createCategory } from "./createCategory";
-import { updateCategory } from "./updateCategory";
-import { getProductByCategory } from "./getProductByCategory";
-import { getCategories } from "./getCategories";
-import { getCategoryById } from "./getCategoryById";
-import { getProducts } from "./getProducts";
-import { getProductById } from "./getProductById";
-import { deleteCategory } from "./deleteCategory";
-import { deleteProduct } from "./deleteProduct";
-import { updateProduct } from "./updateProduct";
-import { createProduct } from "./createProduct";
-import { searchProductsByTitle } from "./searchProductByTitle";
+import { createCategory } from "./thunk/createCategory";
+import { updateCategory } from "./thunk/updateCategory";
+import { getProductByCategory } from "./thunk/getProductByCategory";
+import { getCategories } from "./thunk/getCategories";
+import { getCategoryById } from "./thunk/getCategoryById";
+import { getProducts } from "./thunk/getProducts";
+import { getProductById } from "./thunk/getProductById";
+import { deleteCategory } from "./thunk/deleteCategory";
+import { deleteProduct } from "./thunk/deleteProduct";
+import { updateProduct } from "./thunk/updateProduct";
+import { createProduct } from "./thunk/createProduct";
+import { searchProductsByTitle } from "./thunk/searchProductByTitle";
 
 export const extraReducers = (
   builder: ActionReducerMapBuilder<ProductState>
@@ -124,4 +124,27 @@ export const extraReducers = (
   builder.addMatcher(isAnyOf(createProduct.fulfilled), (state, action) => {
     state.products = [...state.products, action.payload];
   });
+
+  builder.addMatcher(
+    isAnyOf(searchProductsByTitle.rejected),
+    (state, action) => {
+      state.error = action.error.message || "Failed to search products";
+      state.searchResults = [];
+      state.isLoading = false;
+    }
+  );
+
+  builder.addMatcher(isAnyOf(searchProductsByTitle.pending), (state) => {
+    state.error = null;
+  });
+  builder.addMatcher(
+    isAnyOf(searchProductsByTitle.fulfilled),
+    (state, action) => {
+      if (action.payload.shouldClear) {
+        state.searchResults = [];
+      } else {
+        state.searchResults = action.payload;
+      }
+    }
+  );
 };

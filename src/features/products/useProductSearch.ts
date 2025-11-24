@@ -2,6 +2,7 @@ import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
 import { searchProductsByTitle } from "./thunk/searchProductByTitle";
 import { productActions } from ".";
+import { toast } from "react-toastify";
 
 export const useProductSearch = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export const useProductSearch = () => {
     try {
       return await dispatch(searchProductsByTitle(term)).unwrap();
     } catch (error) {
-      console.error("Search failed:", error);
+      toast.error("Search failed: " + error);
       throw error;
     }
   };

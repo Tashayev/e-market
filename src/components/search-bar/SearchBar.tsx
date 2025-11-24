@@ -13,14 +13,23 @@ export default function SearchBar() {
     setInputValue(event.target.value);
   };
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-     if (e.key === "Enter" && inputValue.trim()) {
+    if (e.key === "Enter" && inputValue.trim()) {
       navigate(`/search?query=${encodeURIComponent(inputValue)}`);
+      setInputValue("");
     }
   };
-  
+
+  useEffect(() => {
+    if (serachValue.trim() && serachValue !== inputValue) {
+      navigate(`/search?query=${encodeURIComponent(serachValue)}`);
+    }
+  }, [serachValue, navigate, inputValue]);
+
   const clearSearch = () => {
     setInputValue("");
   };
+  
+
   return (
     <Search>
       <SearchIconWrapper>
@@ -34,9 +43,7 @@ export default function SearchBar() {
         onKeyDown={handleSearch}
       />
       {inputValue && (
-        <ClearIconWrapper onClick={clearSearch}>
-          ×
-        </ClearIconWrapper>
+        <ClearIconWrapper onClick={clearSearch}>×</ClearIconWrapper>
       )}
       <SettingIconWrapper>
         <SearchInputMenu />

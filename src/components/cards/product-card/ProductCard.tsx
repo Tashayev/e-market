@@ -4,13 +4,13 @@ import {
   CardContent,
   CardActions,
   Button,
-  IconButton,
+  
   Box,
 } from "@mui/material";
-import { ShoppingBag } from "lucide-react";
-import { NavLink } from "react-router";
+
+import { useLocation, useNavigate } from "react-router";
 import type { Product } from "@/types/Products";
-import { useCarts } from "@/features/cart/useCart";
+
 import { productSx } from "./product";
 import { useEffect, useState } from "react";
 
@@ -20,9 +20,13 @@ interface ProductProps {
 
 export default function ProductCard({ product }: ProductProps) {
   const { title, price, id, images } = product;
-  const { addToCart } = useCarts();
+  
   const [imageUrl, setImageUrl] = useState(images[0]);
-
+   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const searchParams = new URLSearchParams(location.search);
+  const currentSearchQuery = searchParams.get('query');
   useEffect(() => {
     const img = new Image();
     img.onload = () => setImageUrl(images[0]);
@@ -33,8 +37,14 @@ export default function ProductCard({ product }: ProductProps) {
     img.src = images[0];
   }, [images]);
 
-  const handleAddCart = () => {
-    addToCart({ productId: id, quantity: 1 });
+  
+  const handleOpenProduct = () => {
+    navigate(`/product/${id}`, {
+      state: { 
+        fromSearch: true,
+        searchQuery: currentSearchQuery 
+      }
+    });
   };
 
   return (
@@ -58,8 +68,7 @@ export default function ProductCard({ product }: ProductProps) {
           }}
         >
           <Button
-            component={NavLink}
-            to={`/product/${id}`}
+            onClick={handleOpenProduct} 
             variant="outlined"
             size="small"
             sx={productSx.Button}
@@ -67,12 +76,7 @@ export default function ProductCard({ product }: ProductProps) {
             Open
           </Button>
 
-          <IconButton
-            onClick={handleAddCart}
-            sx={productSx.Button}
-          >
-            <ShoppingBag size={20} />
-          </IconButton>
+          
         </Box>
       </CardActions>
     </Card>

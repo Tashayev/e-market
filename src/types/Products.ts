@@ -23,6 +23,7 @@ export interface ProductState {
   products: Product[];
   productById: Product | null;
   searchResults: Product[];
+  setError: string | null;
 }
 
 

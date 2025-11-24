@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //types
 import type { ProductState } from "@/types/Products";
 //reducers
-import { extraReducers } from "./thunk/extraReducer";
+import { extraReducers } from "./extraReducer";
 import * as reducers from "./reducers";
 
 const initialState: ProductState = {
@@ -13,6 +13,7 @@ const initialState: ProductState = {
   productById: null,
   searchResults: [],
   error: null,
+  setError: null,
 };
 
 export const productSlice = createSlice({

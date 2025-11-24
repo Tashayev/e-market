@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Settings2 } from "lucide-react";
-import { Box } from "@mui/material";
+import { Box, Breadcrumbs, Link } from "@mui/material";
 
 export default function SearchInputMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -26,16 +26,16 @@ export default function SearchInputMenu() {
         sx={{
           "&:focus": {
             outline: "none",
-          }, 
+          },
           "&:hover": {
             backgroundColor: "transparent",
           },
-         minWidth: 0,        
-         px: 0,  
-         margin: 0,
+          minWidth: 0,
+          px: 0,
+          margin: 0,
         }}
       >
-        <Settings2 style={{ color: "black",  }} />
+        <Settings2 style={{ color: "black" }} />
       </Button>
       <Menu
         id="basic-menu"
@@ -48,7 +48,28 @@ export default function SearchInputMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              MUI
+            </Link>
+            <Link
+              underline="hover"
+              color="inherit"
+              href="/material-ui/getting-started/installation/"
+            >
+              Core
+            </Link>
+            <Link
+              underline="hover"
+              color="text.primary"
+              href="/material-ui/react-breadcrumbs/"
+              aria-current="page"
+            >
+              Breadcrumbs
+            </Link>
+          </Breadcrumbs>
+        </MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>

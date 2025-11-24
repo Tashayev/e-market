@@ -4,12 +4,14 @@ interface ButtonTypes {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 export default function MainButton({ 
   disabled = false, 
   type = 'button', 
-  children, 
+  children,
+  onClick, 
   ...props 
 }: ButtonTypes) {
   return (
