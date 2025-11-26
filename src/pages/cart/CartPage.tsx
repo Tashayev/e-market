@@ -1,9 +1,14 @@
 import CartCard from "@/components/cards/cart-cards/CartCard";
 import { useCarts } from "@/features/cart/useCart";
 import { Box, Grid, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 export default function CartPage() {
   const { cartProducts, totalPrice } = useCarts();
+  useEffect(() => {
+  
+  }, [cartProducts]); 
+  
   return (
     <Box>
       {cartProducts.length > 0 ? (

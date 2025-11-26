@@ -89,7 +89,7 @@ export const AuthPage: FC = () => {
   };
 
   const onSubmit = async (data: LoginForm | RegisterForm) => {
-    console.log("Form submitted:", data);
+    
 
     try {
       if (isLogin) {
@@ -135,7 +135,7 @@ export const AuthPage: FC = () => {
         toast.success("Registration successful! Welcome!");
       }
     } catch (error: any) {
-      console.error("Auth error:", error);
+     
       toast.error(
         `${isLogin ? "Login" : "Registration"} error: ${error.message}`
       );

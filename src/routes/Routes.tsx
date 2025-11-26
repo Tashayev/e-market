@@ -10,7 +10,7 @@ import AdminCategoriesPage from "@/pages/admin/adminCategoriesPage/AdminCategori
 import AdminProductsPage from "@/pages/admin/adminProductsPage/AdminProductsPage";
 import { AdminRoute } from "./AdminRoute";
 import CartPage from "@/pages/cart/CartPage";
-import SearchPage from "@/pages/search/SearchPage";
+import SearchPage from "@/pages/products/search/SearchPage";
 
 export const router = createBrowserRouter([
   //admin routes

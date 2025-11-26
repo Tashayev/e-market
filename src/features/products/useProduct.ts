@@ -1,11 +1,12 @@
 //react
 import { useCallback, useMemo } from "react";
 //types
-import type { 
-  CreateCategory,  
-  CreateProduct,  
-  UpdateCategory, 
-  UpdateProduct 
+import type {
+  CreateCategory,
+  CreateProduct,
+  Product,
+  UpdateCategory,
+  UpdateProduct,
 } from "@/types/Products";
 //hooks
 import { useDispatch } from "@/tools/hooks/useDispatch";
@@ -22,19 +23,23 @@ import { updateProduct } from "./thunk/updateProduct";
 import { createProduct } from "./thunk/createProduct";
 import { getCategoryById } from "./thunk/getCategoryById";
 import { getProducts } from "./thunk/getProducts";
+import { productActions } from ".";
 
 export const useProducts = () => {
   const dispatch = useDispatch();
-  
+
   const categories = useSelector((state) => state.product.categories);
-  const products = useSelector((state) => state.product.products);  
-  const productById = useSelector((state) => state.product.productById);
+  const products = useSelector((state) => state.product.products);
+  const productById = useSelector((state) => {
+    const prod = state.product.productById;   
+    return prod;
+  });
   const isLoading = useSelector((state) => state.product.isLoading);
-  
+
   const memoizedCategories = useMemo(() => categories, [categories]);
-  const memoizedProducts = useMemo(() => products, [products]);  
+  const memoizedProducts = useMemo(() => products, [products]);
   const memoizedProductById = useMemo(() => productById, [productById]);
-  
+
   const fetchCategories = useCallback(
     async () => dispatch(getCategories()).unwrap(),
     [dispatch]
@@ -51,19 +56,19 @@ export const useProducts = () => {
   );
 
   const fetchProductById = useCallback(
-    async (id: number) => {      
-      const existingProduct = memoizedProducts.find(product => product.id === id);
-      if (existingProduct) {
-        return Promise.resolve(existingProduct);
-      }
+    async (id: number) => {
+      
+      
       return dispatch(getProductById(id)).unwrap();
     },
-    [dispatch, memoizedProducts]
+    [dispatch]
   );
 
   const fetchCategoryById = useCallback(
-    async (id: number) => {      
-      const existingCategory = memoizedCategories.find(category => category.id === id);
+    async (id: number) => {
+      const existingCategory = memoizedCategories.find(
+        (category) => category.id === id
+      );
       if (existingCategory) {
         return Promise.resolve(existingCategory);
       }
@@ -101,13 +106,15 @@ export const useProducts = () => {
     async (data: CreateProduct) => dispatch(createProduct(data)).unwrap(),
     [dispatch]
   );
+  const addProductIfMissing = (data:Product) => {
+    dispatch(productActions.addProductIfMissing(data));
+  };
 
-  
   return useMemo(
     () => ({
       // State
       categories: memoizedCategories,
-      products: memoizedProducts,      
+      products: memoizedProducts,
       productById: memoizedProductById,
       isLoading,
 
@@ -117,6 +124,7 @@ export const useProducts = () => {
       fetchProductsByCategory,
       fetchProductById,
       fetchCategoryById,
+      addProductIfMissing,
       createCategory: createCategoryAction,
       updateCategory: updateCategoryAction,
       deleteCategory: deleteCategoryAction,
@@ -127,7 +135,7 @@ export const useProducts = () => {
     [
       // State dependencies
       memoizedCategories,
-      memoizedProducts,      
+      memoizedProducts,
       memoizedProductById,
       isLoading,
 

@@ -1,36 +1,47 @@
 import { useProducts } from "@/features/products/useProduct";
-import {  Box, Button, IconButton, ImageList, ImageListItem, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  ImageList,
+  ImageListItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { productSx } from "./productStyle";
 import { useCarts } from "@/features/cart/useCart";
 import { ShoppingBag } from "lucide-react";
 
 export default function ProductDeitalsPage() {
-  const { productById, fetchProductById } = useProducts();
-  const { id } = useParams<{ id: string }>();
-  const location = useLocation();
   const navigate = useNavigate();
-  
-  const { fromSearch, searchQuery } = location.state || {};
-const { addToCart } = useCarts();
+
+  const { id } = useParams<{ id: string | undefined }>();
+  const numId = Number(id);
+  const { addToCart } = useCarts();
+  const { productById, fetchProductById, addProductIfMissing } = useProducts();
+
+  useEffect(() => {
+    if (numId) fetchProductById(numId);
+  }, [numId, fetchProductById]);
+
   const handleAddCart = () => {
-    addToCart({ productId: Number(id), quantity: 1 });
+    if (!productById) return;
+    
+    addProductIfMissing(productById);
+    
+    addToCart({
+      productId: productById.id,
+      quantity: 1,
+    });
   };
   const handleBack = () => {
-    if (fromSearch && searchQuery) {
-      
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-    } else {
-      navigate(-1); 
-    }
+    navigate(-1);
   };
-  useEffect(() => {
-    if (id) fetchProductById(Number(id));
-  }, [id, fetchProductById]);
 
   return (
-    <Stack spacing={5} >
+    <Stack spacing={5}>
       <Box sx={productSx.ButtonBox}>
         <Button variant="outlined" onClick={handleBack}>
           Back
@@ -49,11 +60,7 @@ const { addToCart } = useCarts();
         <ImageList sx={productSx.ImageList} cols={3} rowHeight={164}>
           {productById.images.map((image) => (
             <ImageListItem key={image}>
-              <img
-                src={image}
-                alt="pic"
-                loading="lazy"
-              />
+              <img src={image} alt="pic" loading="lazy" />
             </ImageListItem>
           ))}
         </ImageList>

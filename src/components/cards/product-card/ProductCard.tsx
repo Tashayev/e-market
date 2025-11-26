@@ -4,7 +4,6 @@ import {
   CardContent,
   CardActions,
   Button,
-  
   Box,
 } from "@mui/material";
 
@@ -20,13 +19,14 @@ interface ProductProps {
 
 export default function ProductCard({ product }: ProductProps) {
   const { title, price, id, images } = product;
-  
   const [imageUrl, setImageUrl] = useState(images[0]);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
-  
-  const searchParams = new URLSearchParams(location.search);
-  const currentSearchQuery = searchParams.get('query');
+
+  //const isSearchPage = location.pathname === "/search";
+  //const searchParams = new URLSearchParams(location.search);
+  //const currentSearchQuery = searchParams.get("query") || "";
+
   useEffect(() => {
     const img = new Image();
     img.onload = () => setImageUrl(images[0]);
@@ -37,13 +37,15 @@ export default function ProductCard({ product }: ProductProps) {
     img.src = images[0];
   }, [images]);
 
-  
   const handleOpenProduct = () => {
+    const isSearch = location.pathname === "/search";
+    const query = new URLSearchParams(location.search).get("query");
+
     navigate(`/product/${id}`, {
-      state: { 
-        fromSearch: true,
-        searchQuery: currentSearchQuery 
-      }
+      state: {
+        fromSearch: isSearch,
+        searchQuery: query,
+      },
     });
   };
 
@@ -68,15 +70,13 @@ export default function ProductCard({ product }: ProductProps) {
           }}
         >
           <Button
-            onClick={handleOpenProduct} 
+            onClick={handleOpenProduct}
             variant="outlined"
             size="small"
             sx={productSx.Button}
           >
             Open
           </Button>
-
-          
         </Box>
       </CardActions>
     </Card>

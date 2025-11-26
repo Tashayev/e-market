@@ -12,7 +12,9 @@ export const localStorageMiddleware: Middleware =
       String(action.type).startsWith("cart/")
     ) {
       const state = store.getState() as RootState;
+      
       localStorage.setItem("cart", JSON.stringify(state.cart.items));
+     
     }
 
     return result;

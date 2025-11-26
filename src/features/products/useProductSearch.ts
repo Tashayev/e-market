@@ -21,6 +21,9 @@ export const useProductSearch = () => {
       throw error;
     }
   };
+  const addProductIfMissing = (data: any) => {
+    dispatch(productActions.addProductIfMissing(data));
+  }
   const clearSearch = () => {
     dispatch(productActions.clearSearchResults());
   };
@@ -30,5 +33,6 @@ export const useProductSearch = () => {
     fetchSearchProductsByTitle,
     clearSearch,
     error,
+    addProductIfMissing
   };
 };

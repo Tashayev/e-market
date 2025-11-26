@@ -114,16 +114,22 @@ export const extraReducers = (
       product.id === updatedProduct.id ? updatedProduct : product
     );
   });
-  builder.addMatcher(
-    isAnyOf(searchProductsByTitle.fulfilled),
-    (state, action) => {
-      state.searchResults = action.payload;
-    }
-  );
 
   builder.addMatcher(isAnyOf(createProduct.fulfilled), (state, action) => {
     state.products = [...state.products, action.payload];
   });
+
+  builder.addMatcher(
+    isAnyOf(searchProductsByTitle.fulfilled),
+    (state, action) => {
+      if (action.payload.shouldClear) {
+        state.searchResults = [];
+      } else {
+        
+        state.searchResults = action.payload;
+      }
+    }
+  );
 
   builder.addMatcher(
     isAnyOf(searchProductsByTitle.rejected),
@@ -137,14 +143,4 @@ export const extraReducers = (
   builder.addMatcher(isAnyOf(searchProductsByTitle.pending), (state) => {
     state.error = null;
   });
-  builder.addMatcher(
-    isAnyOf(searchProductsByTitle.fulfilled),
-    (state, action) => {
-      if (action.payload.shouldClear) {
-        state.searchResults = [];
-      } else {
-        state.searchResults = action.payload;
-      }
-    }
-  );
 };

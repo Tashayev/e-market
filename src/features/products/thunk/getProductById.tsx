@@ -2,17 +2,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 //base url
 import baseService from "@/features/init/baseService";
-//types
-import type { Product } from "@/types/Products";
 
-export const getProductById = createAsyncThunk<Product, number>(
-  "product/getProductById",
-  async (productId, thunkAPI) => {
+export const getProductById = createAsyncThunk(
+  "products/getById",
+  async (id: number, thunkAPI) => {
     try {
-      const res = await baseService.get(`/products/${productId}`);
-      return res.data;
-    } catch (e: any) {
-      return thunkAPI.rejectWithValue(e.response?.data);
+      const response = await baseService.get(`/products/${id}?t=${Date.now()}`);
+      
+      return response.data;
+    } catch (error) {
+      
+      return thunkAPI.rejectWithValue("Failed to fetch product");
     }
   }
 );
