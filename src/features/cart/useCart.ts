@@ -1,42 +1,24 @@
-import { useCallback, useEffect } from "react";
-//types
+import { useEffect, useCallback } from "react";
 import type { CartTypes } from "@/types/CartTyps";
-//hooks
 import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
-
 import { cartActions } from "./index";
 import { getProducts } from "./thunk/getCartProduct";
 
 export const useCarts = () => {
   const dispatch = useDispatch();
-
-  const {
-    cartProducts,
-    totalPrice,
-    totalItems,
-    items: cartsItems,
-    isLoading
-  } = useSelector((state) => state.cart);
-
+  const { items, cartProducts, totalPrice, isLoading } = useSelector((state) => state.cart);
   const products = useSelector((state) => state.product.products);
 
-   
+  // Загружаем продукты, если их нет
   useEffect(() => {
-    if (products.length === 0) { 
-      dispatch(getProducts());
-    }
+    if (products.length === 0) dispatch(getProducts());
   }, [dispatch, products.length]);
 
-   
+  // Пересчитываем cartProducts и totalPrice после загрузки продуктов
   useEffect(() => {
-    if (products.length > 0 && cartsItems.length > 0) {
-      dispatch(cartActions.updateCartCalculations(products));
-    } else if (cartsItems.length === 0) {
-      
-      dispatch(cartActions.clearCart());
-    }
-  }, [dispatch, products, cartsItems]);   
+    if (products.length > 0) dispatch(cartActions.updateCalculations(products));
+  }, [dispatch, products, items]);
 
   const addToCart = useCallback(
     (data: CartTypes) => dispatch(cartActions.addToCart(data)),
@@ -44,41 +26,28 @@ export const useCarts = () => {
   );
 
   const removeFromCart = useCallback(
-    (productId: number) => dispatch(cartActions.removeFromCart({ productId })),
+    (id: number) => dispatch(cartActions.removeFromCart(id)),
     [dispatch]
   );
 
   const updateQuantity = useCallback(
-    (productId: number, quantity: number) => 
-      dispatch(cartActions.updateQuantity({ productId, quantity })),
+    (id: number, quantity: number) =>
+      dispatch(cartActions.updateQuantity({ id, quantity })),
     [dispatch]
   );
 
-  const getProductQuantity = useCallback(
-    (productId: number) => {
-      const item = cartsItems.find(item => item.productId === productId);
-      return item ? item.quantity : 0;
-    },
-    [cartsItems]
-  );
+  const isProductInCart = useCallback((id: number) => items.some(i => i.productId === id), [items]);
+  const getProductQuantity = useCallback((id: number) => items.find(i => i.productId === id)?.quantity ?? 0, [items]);
 
-  const isProductInCart = useCallback(
-    (productId: number) => {
-      return cartsItems.some(item => item.productId === productId);
-    },
-    [cartsItems]
-  );
-console.log('useCarts cartProducts:', cartProducts);
   return {
+    items,
+    isLoading,
     cartProducts,
     totalPrice,
-    totalItems,
-    cartsItems,
-    isLoading,
     addToCart,
     removeFromCart,
-    updateQuantity,  
-    getProductQuantity,
+    updateQuantity,
     isProductInCart,
+    getProductQuantity,
   };
 };

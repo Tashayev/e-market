@@ -2,31 +2,10 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { CartState, CartTypes } from "@/types/CartTyps";
 import type { Product } from "@/types/Products";
+import { calculateCartData } from "@/utils/calculateCartData";
 
-const updateLocalStorage = (items: CartTypes[]) => {
+const save = (items: CartTypes[]) => {
   localStorage.setItem("cart", JSON.stringify(items));
-};
-
-const updateCalculations = (state: CartState, allProducts: Product[] = []) => {
-  if (allProducts.length === 0) return;
-  
-  state.cartProducts = allProducts.filter(product => 
-    state.items.some(item => item.productId === product.id)
-  ).map(product => {
-    const cartItem = state.items.find(item => item.productId === product.id);
-    return {
-      ...product,
-      quantity: cartItem?.quantity || 1
-    };
-  });
-  
-  state.totalPrice = state.cartProducts.reduce((total, product) => {
-    return total + product.price * product.quantity;
-  }, 0);
-  
-  state.totalItems = state.items.reduce((total, item) => 
-    total + item.quantity, 0
-  );
 };
 
 export const addToCart = (
@@ -34,49 +13,32 @@ export const addToCart = (
   action: PayloadAction<CartTypes>
 ) => {
   const { productId, quantity } = action.payload;
-  const indexProductId = state.items.findIndex(
-    (item) => item.productId === productId
-  );
 
-  if (indexProductId >= 0) {
-    state.items[indexProductId].quantity += quantity;
-  } else {
-    state.items.push({ productId, quantity });
-  }
+  const found = state.items.find((i) => i.productId === productId);
 
-  updateLocalStorage(state.items);
-  
-  
+  if (found) found.quantity += quantity;
+  else state.items.push({ productId, quantity });
+
+  save(state.items);
 };
 
 export const removeFromCart = (
   state: CartState,
-  action: PayloadAction<{ productId: number; allProducts?: Product[] }>
+  action: PayloadAction<number>
 ) => {
-  const { productId, allProducts } = action.payload;
-  state.items = state.items.filter((item) => item.productId !== productId);
-  updateLocalStorage(state.items);
-  
-  if (allProducts) {
-    updateCalculations(state, allProducts);
-  }
+  state.items = state.items.filter((i) => i.productId !== action.payload);
+  save(state.items);
 };
 
 export const updateQuantity = (
   state: CartState,
-  action: PayloadAction<{ productId: number; quantity: number; allProducts?: Product[] }>
+  action: PayloadAction<{ id: number; quantity: number }>
 ) => {
-  const { productId, quantity, allProducts } = action.payload;
-  const item = state.items.find((item) => item.productId === productId);
+  const item = state.items.find((i) => i.productId === action.payload.id);
+  if (!item) return;
 
-  if (item) {
-    item.quantity = quantity;
-    updateLocalStorage(state.items);
-    
-    if (allProducts) {
-      updateCalculations(state, allProducts);
-    }
-  }
+  item.quantity = action.payload.quantity;
+  save(state.items);
 };
 
 export const clearCart = (state: CartState) => {
@@ -87,9 +49,16 @@ export const clearCart = (state: CartState) => {
   localStorage.removeItem("cart");
 };
 
-export const updateCartCalculations = (
+export const updateCalculations = (
   state: CartState,
   action: PayloadAction<Product[]>
 ) => {
-  updateCalculations(state, action.payload);
+  const { cartProducts, totalItems, totalPrice } = calculateCartData(
+    state.items,
+    action.payload
+  );
+
+  state.cartProducts = cartProducts;
+  state.totalItems = totalItems;
+  state.totalPrice = totalPrice;
 };
