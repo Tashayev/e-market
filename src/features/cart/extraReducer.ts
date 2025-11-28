@@ -1,7 +1,7 @@
 //redux
 import { isAnyOf, type ActionReducerMapBuilder } from "@reduxjs/toolkit";
 //types
-import type { CartState } from "@/types/CartTyps";
+import type { CartState } from "@/types/CartTyps"; 
 //thunks
 import { getProducts } from "../products/thunk/getProducts";
 
