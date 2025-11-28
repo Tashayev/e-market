@@ -1,15 +1,18 @@
+//redux
 import { isAnyOf, type ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { getProducts } from "./thunk/getCartProduct";
+//types
 import type { CartState } from "@/types/CartTyps";
+//thunks
+import { getProducts } from "../products/thunk/getProducts";
 
 export const extraReducers = (builder: ActionReducerMapBuilder<CartState>) => {
   builder.addMatcher(isAnyOf(getProducts.pending), (state) => {
     state.isLoading = true;
   });
 
-  builder.addMatcher(isAnyOf(getProducts.fulfilled), (state, action) => {
+  builder.addMatcher(isAnyOf(getProducts.fulfilled), (state) => {
     state.isLoading = false;
-    state.items = action.payload;
+    state.loaded = true;
   });
 
   builder.addMatcher(isAnyOf(getProducts.rejected), (state) => {

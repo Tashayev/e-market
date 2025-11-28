@@ -1,24 +1,32 @@
-import { useEffect, useCallback } from "react";
+//react
+import { useEffect, useCallback, useMemo } from "react";
+//types
 import type { CartTypes } from "@/types/CartTyps";
+//redux
 import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
+//actions
 import { cartActions } from "./index";
-import { getProducts } from "./thunk/getCartProduct";
+//thunks
+import { getProducts } from "../products/thunk/getProducts";
+//utils
+import { calculateCartData } from "@/utils/calculateCartData";
 
 export const useCarts = () => {
   const dispatch = useDispatch();
-  const { items, cartProducts, totalPrice, isLoading } = useSelector((state) => state.cart);
+  const { items, isLoading, loaded } = useSelector((state) => state.cart);
   const products = useSelector((state) => state.product.products);
+  
+  const { cartProducts, totalPrice, totalItems } = useMemo(
+    () => calculateCartData(items, products),
+    [items, products]
+  );
 
-  // Загружаем продукты, если их нет
   useEffect(() => {
-    if (products.length === 0) dispatch(getProducts());
-  }, [dispatch, products.length]);
-
-  // Пересчитываем cartProducts и totalPrice после загрузки продуктов
-  useEffect(() => {
-    if (products.length > 0) dispatch(cartActions.updateCalculations(products));
-  }, [dispatch, products, items]);
+    if (!loaded && !isLoading) {
+      dispatch(getProducts());
+    }
+  }, [loaded, isLoading, dispatch]);
 
   const addToCart = useCallback(
     (data: CartTypes) => dispatch(cartActions.addToCart(data)),
@@ -29,24 +37,36 @@ export const useCarts = () => {
     (id: number) => dispatch(cartActions.removeFromCart(id)),
     [dispatch]
   );
-
   const updateQuantity = useCallback(
     (id: number, quantity: number) =>
       dispatch(cartActions.updateQuantity({ id, quantity })),
     [dispatch]
   );
+  const clearCart = useCallback(
+    () => dispatch(cartActions.clearCart()),
+    [dispatch]
+  );
 
-  const isProductInCart = useCallback((id: number) => items.some(i => i.productId === id), [items]);
-  const getProductQuantity = useCallback((id: number) => items.find(i => i.productId === id)?.quantity ?? 0, [items]);
+  const isProductInCart = useCallback(
+    (id: number) => items.some((i) => i.productId === id),
+    [items]
+  );
+  const getProductQuantity = useCallback(
+    (id: number) => items.find((i) => i.productId === id)?.quantity ?? 0,
+    [items]
+  );
 
   return {
+   
     items,
     isLoading,
     cartProducts,
     totalPrice,
+    totalItems,
     addToCart,
     removeFromCart,
     updateQuantity,
+    clearCart,
     isProductInCart,
     getProductQuantity,
   };

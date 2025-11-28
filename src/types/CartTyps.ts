@@ -7,9 +7,8 @@ export interface CartTypes {
 export interface CartState {
   items: CartTypes[];
   isLoading: boolean;
-  cartProducts: CartProduct[];
-  totalPrice: number;
-  totalItems: number;
+  loaded: boolean
+  
 }
 export type CartProduct = Product & {
   quantity: number;
