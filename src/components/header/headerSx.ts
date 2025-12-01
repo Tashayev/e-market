@@ -2,11 +2,11 @@ import { type SxProps, type Theme } from "@mui/material";
 
 export const headerSx: Record<string, SxProps<Theme>> = {
   Box: {
-    backgroundColor: "#fff",
-    padding: "10px 20px 10px",
+    backdropFilter: "blur(1.5px)",
+    alignContent: "center",
+    paddingInline: "20px ",
     width: "100%",
     display: "flex",
-    justifyContent: "space-between",
     boxSizing: "border-box",
     position: "fixed",
     top: "0",
@@ -14,10 +14,13 @@ export const headerSx: Record<string, SxProps<Theme>> = {
     gap: "10px",
     color: "black",
     zIndex: "200",
-    px: "100px",
+    justifyContent: "space-between",
+    maxWidth: "1600px",
+    mx: "auto",
+    py: "10px",
   },
+
   BoxAdmin: {
-    backgroundColor: "#fff",
     display: "flex",
     justifyContent: "end",
     alignItems: "center",
@@ -31,6 +34,7 @@ export const headerSx: Record<string, SxProps<Theme>> = {
   shopCart: {
     marginRight: "10px",
     position: "relative",
+    marginTop: "5px",
   },
   span: {
     position: "absolute",
@@ -41,7 +45,7 @@ export const headerSx: Record<string, SxProps<Theme>> = {
     bottom: "15px",
     right: "-12px",
   },
-  
+
   wrapper: {
     display: "flex",
     alignItems: "center",

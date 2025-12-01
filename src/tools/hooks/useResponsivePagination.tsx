@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 export function useResponsivePagination<T>(items: T[]) {
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const location = useLocation();
 
   
+  
   const calculateItemsPerPage = () => {
+    if(location.pathname ==='/') return 8 
     const height = window.innerHeight;
     if (height < 600) return 6;     
     if (height < 800) return 8; 

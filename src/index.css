@@ -8,7 +8,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F6F7F9;
+  
 }
 input{
   background-color: #F6F7F9;
@@ -29,6 +29,13 @@ a:hover {
 
 body {
   margin: 0;
+  background-image: url("/src/assets/noisy\ background.png");
+  background-size: cover; 
+  background-position: center;
+  max-width: 1600px;
+  margin-left: auto ;
+  margin-right: auto ;
+  
 }
 
 h1 {

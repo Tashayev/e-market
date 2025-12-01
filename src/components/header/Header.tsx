@@ -1,4 +1,4 @@
-import { Menu, ShoppingCart } from "lucide-react";
+import { Heart, Menu, ShoppingCart } from "lucide-react";
 import { headerSx } from "./headerSx";
 import { useUser } from "@/features/auth/user/useUser";
 import { Avatar, Box, Button } from "@mui/material";
@@ -14,7 +14,7 @@ export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
 
   return (
     <Box sx={headerSx.Box}>
-      <Box sx={headerSx.wrapper}>
+      <Box sx={headerSx.Container}>
         {isMobile && (
           <Button onClick={handleToggleSidebar}>
             <Menu color="#ffffff" />
@@ -23,18 +23,17 @@ export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
         <SearchBar />
       </Box>
       <Box sx={headerSx.wrapper}>
+        <Heart />
         <Box sx={headerSx.shopCart}>
           <ShoppingCart />
           <Box sx={headerSx.span}>{cartProducts.length}</Box>
         </Box>
         <Avatar
+          onClick={() => logout()}
           src={user?.avatar}
           alt="User avatar"
           sx={headerSx.Avatar}
         />
-        <Button onClick={() => logout()} variant="contained" color="primary">
-          Log out
-        </Button>
       </Box>
     </Box>
   );
