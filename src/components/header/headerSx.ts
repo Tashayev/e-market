@@ -19,18 +19,6 @@ export const headerSx: Record<string, SxProps<Theme>> = {
     mx: "auto",
     py: "10px",
   },
-
-  BoxAdmin: {
-    display: "flex",
-    justifyContent: "end",
-    alignItems: "center",
-    width: "100%",
-    padding: "10px 20px 10px",
-    boxSizing: "border-box",
-    gap: "10px",
-    position: "fixed",
-    top: "0",
-  },
   shopCart: {
     marginRight: "10px",
     position: "relative",
@@ -45,7 +33,6 @@ export const headerSx: Record<string, SxProps<Theme>> = {
     bottom: "15px",
     right: "-12px",
   },
-
   wrapper: {
     display: "flex",
     alignItems: "center",

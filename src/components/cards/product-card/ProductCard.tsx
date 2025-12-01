@@ -1,8 +1,5 @@
 import {
-  Typography,
-  Card,
-  CardContent,
-  CardActions,
+  Typography,  
   Button,
   Box,
 } from "@mui/material";
@@ -22,10 +19,6 @@ export default function ProductCard({ product }: ProductProps) {
   const [imageUrl, setImageUrl] = useState(images[0]);
   const navigate = useNavigate();
   const location = useLocation();
-
-  //const isSearchPage = location.pathname === "/search";
-  //const searchParams = new URLSearchParams(location.search);
-  //const currentSearchQuery = searchParams.get("query") || "";
 
   useEffect(() => {
     const img = new Image();
@@ -50,35 +43,29 @@ export default function ProductCard({ product }: ProductProps) {
   };
 
   return (
-    <Card sx={productSx.Card}>
-      <CardContent sx={productSx.CardContent}>
-        <Typography variant="h6" component="h6" gutterBottom>
-          {title}
-        </Typography>
-        <img src={imageUrl} width={200} />
-        <Typography variant="body1" sx={{ fontWeight: 500 }}>
-          Price: ${price}
-        </Typography>
-      </CardContent>
+    <Box sx={productSx.Box}>
+      <Typography variant="h6" component="div">
+        {title}
+      </Typography>
+      <Box component='img' src={imageUrl} 
+        sx={productSx.Img}
+      />
+      <Typography variant="body1" sx={{ fontWeight: 500 }}>
+        Price: ${price}
+      </Typography>
 
-      <CardActions sx={productSx.CardActions}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
+      <Box
+        sx={productSx.BtnWrapper}
+      >
+        <Button
+          onClick={handleOpenProduct}
+          variant="outlined"
+          size="small"
+          sx={productSx.Button}
         >
-          <Button
-            onClick={handleOpenProduct}
-            variant="outlined"
-            size="small"
-            sx={productSx.Button}
-          >
-            Open
-          </Button>
-        </Box>
-      </CardActions>
-    </Card>
+          Open
+        </Button>
+      </Box>
+    </Box>
   );
 }

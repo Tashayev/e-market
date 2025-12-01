@@ -8,6 +8,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --font-family: url('/src/assets/fonts/Beatrice\ Headline\ Trail\ Regular.ttf'), sans-serif;
+  --second-family: url('/src/assets/fonts/Beatrice\ Trail\ Light.ttf'), sans-serif;
+  --third-family: url('/src/assets/fonts/Beatrice\ Deck\ Trail\ Medium.ttf'), sans-serif;
   
 }
 input{
@@ -35,7 +38,10 @@ body {
   max-width: 1600px;
   margin-left: auto ;
   margin-right: auto ;
-  
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 h1 {

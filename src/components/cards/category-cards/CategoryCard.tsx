@@ -27,15 +27,10 @@ export default function CategoryCard({ category }: CategoriesProps) {
       <Typography variant="h5" component="div">
         {name}
       </Typography>
-      <img
+      <Box component="img"
         src={imageUrl}
         alt={name}
-        style={{
-          width: "100%",
-          height: "200px",
-          objectFit: "cover",
-          marginTop: "10px",
-        }}
+        sx={categorySx.Img}
       />
 
       <NavLink to={`/category/${id}`}>

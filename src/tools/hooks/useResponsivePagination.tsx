@@ -6,18 +6,21 @@ export function useResponsivePagination<T>(items: T[]) {
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const location = useLocation();
 
-  
-  
   const calculateItemsPerPage = () => {
-    if(location.pathname ==='/') return 8 
     const height = window.innerHeight;
-    if (height < 600) return 6;     
-    if (height < 800) return 8; 
-    if (height < 1000) return 12; 
-    return 15; 
+    const width = window.innerWidth;
+    if (location.pathname === "/admin/products") {
+      if (height < 600) return 6;
+      if (height < 800) return 8;
+      if (height < 1000) return 12;
+      return 15;
+    }
+    if (width < 960) return 2;
+    if (width < 1280) return 4;
+    if (width < 1600) return 6;
+    return 8;
   };
 
-  
   useEffect(() => {
     const updateItems = () => setItemsPerPage(calculateItemsPerPage());
     updateItems();

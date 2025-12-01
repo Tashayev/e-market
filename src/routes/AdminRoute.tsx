@@ -1,11 +1,12 @@
 import { useUser } from "@/features/auth/user/useUser";
 import { Navigate, Outlet } from "react-router-dom";
 import { style } from "./mainContentStyle";
-import AdminHeader from "@/components/header/admin-header/AdminHeader";
+
 import AdminSidebar from "@/components/sidebar/admin-sidebar/AdminSidbar";
 import { useState, useEffect } from "react";
 import useIsMobile from "@/tools/hooks/useIsMobile";
 import { Box } from "@mui/material";
+import Header from "@/components/header/Header";
 
 export const AdminRoute = () => {
   const { user, isAdmin, isAuthenticated } = useUser();
@@ -27,8 +28,7 @@ export const AdminRoute = () => {
 
   return (
     <>
-      <AdminHeader handleToggleAdminSidebar={handleToggleAdminSidebar} />
-
+      <Header handleToggleSidebar={handleToggleAdminSidebar} />
       <Box style={style.container}>
         {isAdminSidebarOpen && (
           <Box
