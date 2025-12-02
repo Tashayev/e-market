@@ -1,10 +1,10 @@
-export interface Categories{
-  id: number,
-  name: string,
-  slug: string,
-  image: string,
-  creationAt: string,
-  updatedAt: string
+export interface Categories {
+  id: number;
+  name: string;
+  slug: string;
+  image: string;
+  creationAt: string;
+  updatedAt: string;
 }
 
 export interface Product {
@@ -24,41 +24,38 @@ export interface ProductState {
   productById: Product | null;
   searchResults: Product[];
   setError: string | null;
+  searchCache: { [key: string]: Product[] };
 }
-
 
 export interface SetLoadingPayload {
   isLoading: boolean;
 }
-export interface ProductTypeCard{
+export interface ProductTypeCard {
   title: string;
   price: number;
-  id: string
+  id: string;
 }
 
-export interface CreateCategory{
-  name: string,
-  image: string,
-  
+export interface CreateCategory {
+  name: string;
+  image: string;
 }
-export interface UpdateCategory{
-  name: string,
-  image: string,
-  id: number | undefined
-  
+export interface UpdateCategory {
+  name: string;
+  image: string;
+  id: number | undefined;
 }
 
 export interface UpdateProduct {
   id: number | undefined;
   title: string;
   price: number;
-  
 }
 
-export interface CreateProduct{
-  title: string,
-  price: number,
-  description: string,
-  categoryId: number,
-  images?: string[]
+export interface CreateProduct {
+  title: string;
+  price: number;
+  description: string;
+  categoryId: number;
+  images?: string[];
 }

@@ -1,19 +1,23 @@
 import CartCard from "@/components/cards/cart-cards/CartCard";
 import { useCarts } from "@/features/cart/useCart";
 import { Box, Button, Grid, Typography } from "@mui/material";
-
+import { cartSx } from "./cartSx";
+import { useEffect } from "react";
 
 export default function CartPage() {
   const { cartProducts, totalPrice, clearCart } = useCarts();
+  useEffect(() => {
+    if (cartProducts.length === 0) return;
+  }, [cartProducts]);
 
- 
   return (
-    <Box>
-      <Box sx={{ mb: 2 }}>
-        <Button onClick={clearCart}>Clear all</Button>
-      </Box>
+    <>
       {cartProducts.length > 0 ? (
         <Box>
+          <Box sx={cartSx.Header}>
+            <Button onClick={clearCart}>Clear all</Button>
+            <Typography variant="h3">Total cart: {totalPrice}$</Typography>
+          </Box>
           <Grid
             container
             rowSpacing={2}
@@ -26,14 +30,14 @@ export default function CartPage() {
                 quantity={p.quantity}
                 title={p.title}
                 price={p.price}
+                images={p.images}
               />
             ))}
           </Grid>
-          <Typography>Total cart: {totalPrice}$</Typography>
         </Box>
       ) : (
-        <Typography>Cart is empty</Typography>
+        <Typography variant="h1">Cart is empty</Typography>
       )}
-    </Box>
+    </>
   );
 }

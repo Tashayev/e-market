@@ -1,7 +1,7 @@
 import { useUser } from "@/features/auth/user/useUser";
 import { Navigate, Outlet } from "react-router-dom";
-import Header from "@/components/header/Header";
-import Sidebar from "@/components/sidebar/Sidebar";
+import Header from "@/modules/header/Header";
+import Sidebar from "@/modules/sidebar/Sidebar";
 import { style } from "./mainContentStyle";
 import { useState, useEffect } from "react";
 import useIsMobile from "@/tools/hooks/useIsMobile";

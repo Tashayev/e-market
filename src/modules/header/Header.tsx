@@ -5,7 +5,8 @@ import { Avatar, Box, Button } from "@mui/material";
 import useIsMobile from "@/tools/hooks/useIsMobile";
 import type { ToggleSidebarProp } from "@/types/LayoutProps";
 import { useCarts } from "@/features/cart/useCart";
-import SearchBar from "../search-bar/SearchBar";
+import SearchBar from "@/components/search-bar/SearchBar";
+
 
 export default function Header({ handleToggleSidebar }: ToggleSidebarProp) {
   const { user, logout } = useUser();

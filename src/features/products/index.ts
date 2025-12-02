@@ -14,6 +14,7 @@ const initialState: ProductState = {
   searchResults: [],
   error: null,
   setError: null,
+  searchCache: {},
 };
 
 export const productSlice = createSlice({
