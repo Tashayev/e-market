@@ -1,17 +1,12 @@
-import {
-  Typography,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  Box,
-} from "@mui/material";
-
+import { Typography, Button, Box } from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
 import type { Product } from "@/types/Products";
 
 import { productSx } from "./product";
 import { useEffect, useState } from "react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useFavorites } from "@/features/favorites/useFavorites";
 
 interface ProductProps {
   product: Product;
@@ -22,11 +17,9 @@ export default function ProductCard({ product }: ProductProps) {
   const [imageUrl, setImageUrl] = useState(images[0]);
   const navigate = useNavigate();
   const location = useLocation();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
-  //const isSearchPage = location.pathname === "/search";
-  //const searchParams = new URLSearchParams(location.search);
-  //const currentSearchQuery = searchParams.get("query") || "";
-
+  const active = isFavorite(product.id);
   useEffect(() => {
     const img = new Image();
     img.onload = () => setImageUrl(images[0]);
@@ -36,7 +29,7 @@ export default function ProductCard({ product }: ProductProps) {
       );
     img.src = images[0];
   }, [images]);
-
+  
   const handleOpenProduct = () => {
     const isSearch = location.pathname === "/search";
     const query = new URLSearchParams(location.search).get("query");
@@ -50,35 +43,28 @@ export default function ProductCard({ product }: ProductProps) {
   };
 
   return (
-    <Card sx={productSx.Card}>
-      <CardContent sx={productSx.CardContent}>
-        <Typography variant="h6" component="h6" gutterBottom>
-          {title}
-        </Typography>
-        <img src={imageUrl} width={200} />
-        <Typography variant="body1" sx={{ fontWeight: 500 }}>
-          Price: ${price}
-        </Typography>
-      </CardContent>
+    <Box sx={productSx.Box}>
+      <Box>
+        <Typography variant="h6">{title}</Typography>
+        <Button onClick={() => toggleFavorite(product.id)}>
+          {active ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+        </Button>
+      </Box>
+      <Box component="img" src={imageUrl} sx={productSx.Img} />
+      <Typography variant="body1" sx={{ fontWeight: 500 }}>
+        Price: ${price}
+      </Typography>
 
-      <CardActions sx={productSx.CardActions}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
+      <Box sx={productSx.BtnWrapper}>
+        <Button
+          onClick={handleOpenProduct}
+          variant="outlined"
+          size="small"
+          sx={productSx.Button}
         >
-          <Button
-            onClick={handleOpenProduct}
-            variant="outlined"
-            size="small"
-            sx={productSx.Button}
-          >
-            Open
-          </Button>
-        </Box>
-      </CardActions>
-    </Card>
+          Open
+        </Button>
+      </Box>
+    </Box>
   );
 }

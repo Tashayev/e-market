@@ -1,30 +1,46 @@
-//redux store configuration
+//redux
 import { configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+
 //reducers
 import userReducer from "@/features/auth/user";
 import productReducer from "@/features/products";
 import cartReducer from "@/features/cart";
-//middleware
-import { localStorageMiddleware } from "./middleware/localStorageMiddleware";
-import { loadCartFromLocalStorage } from "@/utils/loadCartFromLocalStorage";
-import { cartInitialState } from "@/features/cart";
+import favoritesReducer from "@/features/favorites";
+
+//types
+import type { FavoritesState } from "@/types/FavoritesTypes";
+import type { CartState } from "@/types/CartTyps";
+
+const favoritesPersistConfig = {
+  key: "favorites",
+  storage,
+};
+
+const persistedFavoritesReducer = persistReducer<FavoritesState>(
+  favoritesPersistConfig,
+  favoritesReducer
+);
+
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+};
+const persistedCartReducer = persistReducer<CartState>(
+  cartPersistConfig,
+  cartReducer
+);
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    cart: cartReducer,
+    cart: persistedCartReducer,
     product: productReducer,
+    favorites: persistedFavoritesReducer,
   },
-preloadedState: {
-    cart: {
-    ...cartInitialState,
-    items: loadCartFromLocalStorage()
-  }
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false 
-    }).concat(localStorageMiddleware),
 });
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

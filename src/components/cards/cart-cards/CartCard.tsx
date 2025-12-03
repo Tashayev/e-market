@@ -1,7 +1,5 @@
 //MUI
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -15,26 +13,28 @@ type CartCardType = {
   title: string;
   quantity: number;
   price: number;
+  images: string[];
 };
 
-export default function CartCard({ id, quantity, title, price }: CartCardType) {
+export default function CartCard({ id, quantity, title, price, images }: CartCardType) {
   const { removeFromCart } = useCarts();
 
   return (
-    <Card sx={cartCardSx.Card}>
-      <CardContent>
-        <Stack spacing={2}>
-          <Typography gutterBottom sx={cartCardSx.Typography}>
-            Name: {title}
-          </Typography>
-          <Typography sx={cartCardSx.Typography}>Price: {price}$</Typography>
-          <Typography sx={cartCardSx.Typography}>
-            Total: {quantity * price}$
-          </Typography>
-          <Typography variant="body2"></Typography>
-        </Stack>
-      </CardContent>
-      <CardActions>
+    <Box sx={cartCardSx.Card}>
+      <Stack spacing={2}>
+        <Typography gutterBottom sx={cartCardSx.Typography}>
+          Name: {title}
+        </Typography>
+        <Box component="img" src={images[0]}/>
+        <Typography sx={cartCardSx.Typography}>Price: {price}$</Typography>
+        <Typography sx={cartCardSx.Typography}>
+          Total: {quantity * price}$
+        </Typography>
+        
+        <Typography sx={cartCardSx.Typography}>
+          Quantity: {quantity}
+          {quantity > 1 ? " peaces" : " peace"}{" "}
+        </Typography>
         <Button
           size="small"
           variant="contained"
@@ -43,7 +43,7 @@ export default function CartCard({ id, quantity, title, price }: CartCardType) {
         >
           Delete
         </Button>
-      </CardActions>
-    </Card>
+      </Stack>
+    </Box>
   );
 }

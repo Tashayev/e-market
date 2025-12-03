@@ -20,3 +20,18 @@ export const addProductIfMissing = (
   const exists = state.products.some((p) => p.id === action.payload.id);
   if (!exists) state.products.push(action.payload);
 };
+
+export const setSearchResults = (
+  state: ProductState,
+  action: PayloadAction<Product[]>
+) => {
+  state.searchResults = action.payload;
+};
+
+export const cacheSearchResult = (
+  state: ProductState,
+  action: PayloadAction<{ query: string; data: Product[] }>
+) => {
+  const { query, data } = action.payload;
+  state.searchCache[query] = data;
+};

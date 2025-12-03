@@ -1,6 +1,7 @@
 import ProductCard from "@/components/cards/product-card/ProductCard";
 import { useProductSearch } from "@/features/products/useProductSearch";
-import { Box } from "@mui/material";
+import { useResponsivePagination } from "@/tools/hooks/useResponsivePagination";
+import { Box, Grid, Pagination } from "@mui/material";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 
@@ -13,19 +14,36 @@ export default function SearchPage() {
   useEffect(() => {
     fetchSearchProductsByTitle(toLowerCaseQuery);
   }, [toLowerCaseQuery]);
+  const {
+    page,
+    setPage,
+    totalPages,
+    paginatedItems: productsToShow,
+  } = useResponsivePagination(searchResults);
   return (
-    <Box>
-      {isLoading ? (
-        <Box>Loading...</Box>
-      ) : error ? (
-        <Box>Error: {error}</Box>
-      ) : searchResults.length === 0 ? (
-        <Box>No products found</Box>
-      ) : (
-        searchResults.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))
+    <>
+      <Grid container spacing={0.5}>
+        {isLoading ? (
+          <Box>Loading...</Box>
+        ) : error ? (
+          <Box>Error: {error}</Box>
+        ) : searchResults.length === 0 ? (
+          <Box>No products found</Box>
+        ) : (
+          productsToShow.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))
+        )}
+      </Grid>
+      {totalPages > 1 && (
+        <Pagination
+          page={page}
+          count={totalPages}
+          onChange={(_, val) => setPage(val)}
+          color="primary"
+          shape="rounded"
+        />
       )}
-    </Box>
+    </>
   );
 }
