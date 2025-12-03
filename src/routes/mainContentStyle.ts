@@ -1,7 +1,7 @@
 export const style = {
   container:{
     display: 'flex',
-    paddingLeft: '30px',
+    
     marginTop: '80px'
   },
   div:{

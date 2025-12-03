@@ -4,7 +4,8 @@ export const cartCardSx: Record<string, SxProps<Theme>> = {
   Card:{ 
     maxWidth: "275px", 
     width: '100%',
-    p: '10px'
+    p: '20px',
+    bgcolor: 'background.paper',
   },
   Typography:{ color: 'text.secondary', fontSize: 14 }
 }  

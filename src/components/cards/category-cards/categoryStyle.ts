@@ -1,13 +1,16 @@
 import type { SxProps, Theme } from "@mui/material";
 
-
-export const categorySx: Record<string, SxProps<Theme>> ={
-  Box:{
-    minWidth: 275,
-    margin:2
+export const categorySx: Record<string, SxProps<Theme>> = {
+  Box: {
+    maxWidth: 250,
+    margin: 2,
+    bgcolor: "background.paper",
+    p: 2,
   },
-  Card:{    
-    boxShadow:"none",
-    borderRadius:'10px',
-  }
-}
+  Img: {
+    width: "100%",
+    height: "200px",
+    objectFit: "cover",
+    marginTop: "10px",
+  },
+};

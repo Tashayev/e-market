@@ -11,6 +11,7 @@ import AdminProductsPage from "@/pages/admin/adminProductsPage/AdminProductsPage
 import { AdminRoute } from "./AdminRoute";
 import CartPage from "@/pages/cart/CartPage";
 import SearchPage from "@/pages/products/search/SearchPage";
+import FavoritePage from "@/pages/favorite/FavoritePage";
 
 export const router = createBrowserRouter([
   //admin routes
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
       { path: "product/:id", Component: ProductDeitalsPage },
       { path: "cart", Component: CartPage },
       { path: "search", Component: SearchPage },
+      { path: "favorites", Component: FavoritePage }
     ],
   },
   //not authenticated routes

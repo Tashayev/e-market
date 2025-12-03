@@ -1,5 +1,5 @@
 //react
-import { useEffect, useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 //types
 import type { CartTypes } from "@/types/CartTyps";
 //redux
@@ -7,26 +7,18 @@ import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
 //actions
 import { cartActions } from "./index";
-//thunks
-import { getProducts } from "../products/thunk/getProducts";
 //utils
-import { calculateCartData } from "@/utils/calculateCartData";
+import { calculateCartData } from "@/tools/utils/calculateCartData";
 
 export const useCarts = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, loaded } = useSelector((state) => state.cart);
+  const { items } = useSelector((state) => state.cart);
   const products = useSelector((state) => state.product.products);
-  
+
   const { cartProducts, totalPrice, totalItems } = useMemo(
     () => calculateCartData(items, products),
     [items, products]
   );
-
-  useEffect(() => {
-    if (!loaded && !isLoading) {
-      dispatch(getProducts());
-    }
-  }, [loaded, isLoading, dispatch]);
 
   const addToCart = useCallback(
     (data: CartTypes) => dispatch(cartActions.addToCart(data)),
@@ -37,11 +29,13 @@ export const useCarts = () => {
     (id: number) => dispatch(cartActions.removeFromCart(id)),
     [dispatch]
   );
+
   const updateQuantity = useCallback(
     (id: number, quantity: number) =>
       dispatch(cartActions.updateQuantity({ id, quantity })),
     [dispatch]
   );
+
   const clearCart = useCallback(
     () => dispatch(cartActions.clearCart()),
     [dispatch]
@@ -51,15 +45,14 @@ export const useCarts = () => {
     (id: number) => items.some((i) => i.productId === id),
     [items]
   );
+
   const getProductQuantity = useCallback(
     (id: number) => items.find((i) => i.productId === id)?.quantity ?? 0,
     [items]
   );
 
   return {
-   
     items,
-    isLoading,
     cartProducts,
     totalPrice,
     totalItems,
