@@ -4,17 +4,21 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import baseService from "@/features/init/baseService";
 //types
 import type { AvailabelUser } from "@/types/AuthTypes";
+//utils
+import { withErrorHandler } from "@/tools/utils/withErrorHandler";
 
 export const checkUserEmail = createAsyncThunk<boolean, AvailabelUser>(
   "user/checkUserEmail",
   async (data, thunkAPI) => {
-    try {
-      const response = await baseService.get("/users");
-      const users = response.data;
-      const exists = users.some((user: any) => user.email === data.email);
-      return exists;
-    } catch (e: any) {
-      return thunkAPI.rejectWithValue(e.response?.data || e.message);
-    }
+    return withErrorHandler(
+      async () => {
+        const response = await baseService.get("/users");
+        const users = response.data;
+        const exists = users.some((user: any) => user.email === data.email);
+        return exists;
+      },
+      thunkAPI,
+      "Error checking user email:"
+    );
   }
 );
