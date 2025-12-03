@@ -1,5 +1,4 @@
 import { Typography, Button, Box } from "@mui/material";
-
 import { useLocation, useNavigate } from "react-router";
 import type { Product } from "@/types/Products";
 

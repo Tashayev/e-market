@@ -21,6 +21,7 @@ export default function Sidebar({handleToggleSidebar}:ToggleSidebarProp) {
     { name: "Main page", id: 4, navigator: "/" },    
     { name: "Profile", id: 2, navigator: "/profile" },
     { name: "Cart", id: 3, navigator: "/cart" },
+    { name: "Favorites", id: 4, navigator: "/favorites" },
   ];
   return (
     <Box sx={sidebarSx.Box}>

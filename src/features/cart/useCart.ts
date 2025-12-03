@@ -8,7 +8,7 @@ import { useSelector } from "@/tools/hooks/useSelector";
 //actions
 import { cartActions } from "./index";
 //utils
-import { calculateCartData } from "@/utils/calculateCartData";
+import { calculateCartData } from "@/tools/utils/calculateCartData";
 
 export const useCarts = () => {
   const dispatch = useDispatch();

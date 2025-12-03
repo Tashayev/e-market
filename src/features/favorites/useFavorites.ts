@@ -1,6 +1,8 @@
 import { useDispatch } from "@/tools/hooks/useDispatch";
 import { useSelector } from "@/tools/hooks/useSelector";
 import { favoritesActions } from "./index";
+import { filterFavoriteData } from "@/tools/utils/filterFavoriteData";
+import { useMemo } from "react";
 
 export function useFavorites() {
   const dispatch = useDispatch();
@@ -14,10 +16,14 @@ export function useFavorites() {
   const clearFavorites = () => {
     dispatch(favoritesActions.clearFavorites());
   };
-
+  const products = useSelector((state) => state.product.products);
   const isFavorite = (id: number) => items.includes(id);
-
+  const favoriteProducts = useMemo(
+    () => filterFavoriteData(items, products),
+    [items, products]
+  );
   return {
+    favoriteProducts,
     items,
     toggleFavorite,
     clearFavorites,
