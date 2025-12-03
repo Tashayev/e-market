@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { UserState } from "@/types/UserTypes";
 //reducers
 import * as reducers from "./reducers";
-import { extraReducers } from "./thunk/extraReducer";
+import { extraReducers } from "./extraReducer";
 
 const hasToken = !!localStorage.getItem("accessToken");
 

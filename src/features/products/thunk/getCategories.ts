@@ -13,12 +13,11 @@ export const getCategories = createAsyncThunk<Categories[]>(
     return withErrorHandler(
       async () => {
         const res = await baseService.get("/categories");
-      return res.data;
-},
+        return res.data;
+      },
       thunkAPI,
+
       "Error fetching categories: "
     );
-      
-    
   }
 );

@@ -2,9 +2,9 @@
 import { type ActionReducerMapBuilder, isAnyOf } from "@reduxjs/toolkit";
 import type { UserState } from "@/types/UserTypes";
 //thunks
-import { loginUser } from "./login";
-import { getUser } from "./getUser";
-import { updateUser } from "./updateUser";
+import { loginUser } from "./thunk/login";
+import { getUser } from "./thunk/getUser";
+import { updateUser } from "./thunk/updateUser";
 
 export const extraReducers = (builder: ActionReducerMapBuilder<UserState>) => {
   builder
