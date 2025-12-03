@@ -42,7 +42,7 @@ export const extraReducers = (
     isAnyOf(
       getCategories.fulfilled,
       getCategories.rejected,
-      getProducts.fulfilled,
+
       getProducts.rejected,
       getProductByCategory.fulfilled,
       getProductByCategory.rejected,
@@ -75,13 +75,6 @@ export const extraReducers = (
   builder.addMatcher(isAnyOf(getCategoryById.fulfilled), (state, action) => {
     state.categories = action.payload;
   });
-
-  builder.addMatcher(
-    isAnyOf(getProducts.fulfilled, getProductByCategory.fulfilled),
-    (state, action) => {
-      state.products = action.payload;
-    }
-  );
 
   builder.addMatcher(isAnyOf(getProductById.fulfilled), (state, action) => {
     state.productById = action.payload;
@@ -125,7 +118,6 @@ export const extraReducers = (
       if (action.payload.shouldClear) {
         state.searchResults = [];
       } else {
-        
         state.searchResults = action.payload;
       }
     }
@@ -142,5 +134,10 @@ export const extraReducers = (
 
   builder.addMatcher(isAnyOf(searchProductsByTitle.pending), (state) => {
     state.error = null;
+  });
+  builder.addMatcher(isAnyOf(getProducts.fulfilled), (state, action) => {
+    state.products = action.payload;
+    state.isLoading = false;
+    state.loaded = true;
   });
 };

@@ -25,6 +25,7 @@ export interface ProductState {
   searchResults: Product[];
   setError: string | null;
   searchCache: { [key: string]: Product[] };
+  loaded: boolean;
 }
 
 export interface SetLoadingPayload {
