@@ -18,7 +18,6 @@ type CartCardType = {
 
 export default function CartCard({ id, quantity, title, price, images }: CartCardType) {
   const { removeFromCart } = useCarts();
-
   return (
     <Box sx={cartCardSx.Card}>
       <Stack spacing={2}>

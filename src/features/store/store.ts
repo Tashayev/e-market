@@ -39,6 +39,19 @@ export const store = configureStore({
     product: productReducer,
     favorites: persistedFavoritesReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {       
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/FLUSH",
+          "persist/PAUSE",
+          "persist/PURGE",
+          "persist/REGISTER",
+        ],
+      },
+    }),
 });
 export const persistor = persistStore(store);
 

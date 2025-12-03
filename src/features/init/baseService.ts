@@ -17,14 +17,15 @@ const AUTH_HEADER = "Authorization";
 baseService.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-    if (token) {
-      config.headers.set?.(AUTH_HEADER, `Bearer ${token}`);
+    if (token && config.headers) {
+      config.headers[AUTH_HEADER] = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error)
 );
-export const saveTokens = async (accessToken: string) => {
+export const saveTokens = (accessToken: string) => {
   localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
 };
 export const setAuthHeader = (accessToken: string) => {
@@ -66,4 +67,7 @@ baseService.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
+
 export default baseService;
