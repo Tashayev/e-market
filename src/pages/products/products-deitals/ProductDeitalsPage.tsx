@@ -20,17 +20,18 @@ export default function ProductDeitalsPage() {
   const { id } = useParams<{ id: string | undefined }>();
   const numId = Number(id);
   const { addToCart } = useCarts();
-  const { productById, fetchProductById, addProductIfMissing } = useProducts();
+  const { productById, fetchProductById, addProductIfMissing, isLoading } =
+    useProducts();
 
   useEffect(() => {
     if (numId) fetchProductById(numId);
-  }, [numId, fetchProductById]);
+  }, [id]);
 
   const handleAddCart = () => {
     if (!productById) return;
-    
+
     addProductIfMissing(productById);
-    
+
     addToCart({
       productId: productById.id,
       quantity: 1,
@@ -41,30 +42,36 @@ export default function ProductDeitalsPage() {
   };
 
   return (
-    <Stack spacing={5}>
-      <Box sx={productSx.ButtonBox}>
-        <Button variant="outlined" onClick={handleBack}>
-          Back
-        </Button>
-        <IconButton color="primary" onClick={handleAddCart}>
-          <ShoppingBag />
-        </IconButton>
-      </Box>
-      <Typography variant="h6">
-        Name of product: {productById?.title}
-      </Typography>
-      <Typography variant="body1">
-        Description: {productById?.description}
-      </Typography>
-      {productById?.images && (
-        <ImageList sx={productSx.ImageList} cols={3} rowHeight={164}>
-          {productById.images.map((image) => (
-            <ImageListItem key={image}>
-              <img src={image} alt="pic" loading="lazy" />
-            </ImageListItem>
-          ))}
-        </ImageList>
+    <>
+      {isLoading ? (
+        <Box>Loading...</Box>
+      ) : (
+        <Stack spacing={5}>
+          <Box sx={productSx.ButtonBox}>
+            <Button variant="outlined" onClick={handleBack}>
+              Back
+            </Button>
+            <IconButton color="primary" onClick={handleAddCart}>
+              <ShoppingBag />
+            </IconButton>
+          </Box>
+          <Typography variant="h6">
+            Name of product: {productById?.title}
+          </Typography>
+          <Typography variant="body1">
+            Description: {productById?.description}
+          </Typography>
+          {productById?.images && (
+            <ImageList sx={productSx.ImageList} cols={3} rowHeight={164}>
+              {productById.images.map((image) => (
+                <ImageListItem key={image}>
+                  <img src={image} alt="pic" loading="lazy" />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          )}
+        </Stack>
       )}
-    </Stack>
+    </>
   );
 }

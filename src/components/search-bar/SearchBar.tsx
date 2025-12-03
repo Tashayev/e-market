@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SearchInputMenu from "../search-input/SearchInputMenu";
+//import SearchInputMenu from "../search-input/SearchInputMenu";
 import { useNavigate } from "react-router";
 import { SearchIcon } from "lucide-react";
 import { alpha, InputBase, styled } from "@mui/material";
@@ -45,9 +45,9 @@ export default function SearchBar() {
       {inputValue && (
         <ClearIconWrapper onClick={clearSearch}>×</ClearIconWrapper>
       )}
-      <SettingIconWrapper>
+      {/*<SettingIconWrapper>
         <SearchInputMenu />
-      </SettingIconWrapper>
+      </SettingIconWrapper>*/}
     </Search>
   );
 }
@@ -92,23 +92,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const SettingIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  right: 0,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  top: "0",
-  cursor: "pointer",
-  width: "30px",
-}));
+// const SettingIconWrapper = styled("div")(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: "100%",
+//   position: "absolute",
+//   right: 0,
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center",
+//   top: "0",
+//   cursor: "pointer",
+//   width: "30px",
+// }));
 const ClearIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
   position: "absolute",
-  right: "40px",
+  right: "0",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

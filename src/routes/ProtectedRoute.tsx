@@ -1,7 +1,7 @@
 import { useUser } from "@/features/auth/user/useUser";
 import { Navigate, Outlet } from "react-router-dom";
-import Header from "@/components/header/Header";
-import Sidebar from "@/components/sidebar/Sidebar";
+import Header from "@/modules/header/Header";
+import Sidebar from "@/modules/sidebar/Sidebar";
 import { style } from "./mainContentStyle";
 import { useState, useEffect } from "react";
 import useIsMobile from "@/tools/hooks/useIsMobile";
@@ -40,8 +40,7 @@ export const ProtectedRoute = () => {
               top: 0,
               left: 0,
               width: isMobile ? "70%" : "250px",
-              height: isMobile ? "100vh" : "auto",
-              backgroundColor: "#fff",
+              height: isMobile ? "100vh" : "auto",              
               boxShadow: isMobile ? "2px 0 8px rgba(0,0,0,0.3)" : "none",
               zIndex: isMobile ? 1001 : "auto",
               transition: "transform 0.3s ease",

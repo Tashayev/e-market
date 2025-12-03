@@ -1,10 +1,10 @@
-export const style = {
-  container: {
-    
-    
-    
-    "@media screen and (maxWidth: 800px)": {
-      gridTemplateColumns: "repeat(2, 1fr)",
-    },
+import type { SxProps, Theme } from "@mui/material";
+
+export const categorySx: Record<string, SxProps<Theme>> = {
+  Box: {
+    display: "flex",
+    gap: 2,
+    flexDirection: "column",
+    alignItems: "center",
   },
-} as const;
+};

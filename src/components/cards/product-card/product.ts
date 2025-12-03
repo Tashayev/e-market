@@ -1,24 +1,25 @@
 import { type SxProps, type Theme } from "@mui/material";
 
 export const productSx: Record<string, SxProps<Theme>> = {
-  Card: {
-    maxWidth: 240,
-    borderRadius: 2,
-    transition: "transform 0.2s, box-shadow 0.2s",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: 4,
-    },
-    width: "100%",
-  },
-  CardContent: { padding: 2 },
-  CardActions: { padding: 2, paddingTop: 0, display: "flex", alignItems: 'end'},
   Box: {
-    display: "flex",
-    justifyContent: "space-between",
+    maxWidth: 250,
     width: "100%",
+    margin: 2,
+    bgcolor: "background.paper",
+    p: 2,
+    display: "flex",
+    flexDirection: "column",
   },
-  Button: {
-    "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+  BtnWrapper: {
+    marginTop: 2,
+    display: "flex",
+    alignItems: "end",
+    height: "100%",
   },
+  Img: {
+    width: "100%",
+    height: "200px",
+    objectFit: "cover",
+    marginTop: "10px",
+  }
 };
