@@ -44,7 +44,7 @@ export const extraReducers = (
       getCategories.rejected,
 
       getProducts.rejected,
-      getProductByCategory.fulfilled,
+      
       getProductByCategory.rejected,
       getProductById.fulfilled,
       getProductById.rejected,
@@ -140,4 +140,11 @@ export const extraReducers = (
     state.isLoading = false;
     state.loaded = true;
   });
+  builder.addMatcher(
+    isAnyOf(getProductByCategory.fulfilled),
+    (state, action) => {
+      state.productsByCategory = action.payload;
+      state.isLoading = false;
+    }
+  );
 };

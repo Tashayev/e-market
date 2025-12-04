@@ -34,11 +34,14 @@ export const useProducts = () => {
     const prod = state.product.productById;   
     return prod;
   });
+  const productsByCategory = useSelector((state) => state.product.productsByCategory);
+  
   const isLoading = useSelector((state) => state.product.isLoading);
 
   const memoizedCategories = useMemo(() => categories, [categories]);
   const memoizedProducts = useMemo(() => products, [products]);
   const memoizedProductById = useMemo(() => productById, [productById]);
+  const memoizedProductsByCategory = useMemo(() => productsByCategory, [productsByCategory]);
 
   const fetchCategories = useCallback(
     async () => dispatch(getCategories()).unwrap(),
@@ -109,6 +112,7 @@ export const useProducts = () => {
   const addProductIfMissing = (data:Product) => {
     dispatch(productActions.addProductIfMissing(data));
   };
+  
 
   return useMemo(
     () => ({
@@ -117,6 +121,7 @@ export const useProducts = () => {
       products: memoizedProducts,
       productById: memoizedProductById,
       isLoading,
+      productByCategory: memoizedProductsByCategory,
 
       // Actions
       fetchCategories,

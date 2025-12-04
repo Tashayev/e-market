@@ -22,11 +22,15 @@ export function useFavorites() {
     () => filterFavoriteData(items, products),
     [items, products]
   );
+  const removeFromFavorites = (id: number) => {
+    dispatch(favoritesActions.removeFromFavorites(id));
+  };
   return {
     favoriteProducts,
     items,
     toggleFavorite,
     clearFavorites,
     isFavorite,
+    removeFromFavorites,
   };
 }

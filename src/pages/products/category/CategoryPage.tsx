@@ -9,7 +9,8 @@ import { categorySx } from "./category";
 
 export default function CategoryPage() {
   const { id } = useParams<{ id: string }>();
-  const { products, fetchProductsByCategory } = useProducts();
+  const { productByCategory, fetchProductsByCategory, isLoading } =
+    useProducts();
   useEffect(() => {
     if (id) fetchProductsByCategory(Number(id));
   }, [id]);
@@ -18,25 +19,30 @@ export default function CategoryPage() {
     setPage,
     totalPages,
     paginatedItems: productsToShow,
-  } = useResponsivePagination(products);
+  } = useResponsivePagination(productByCategory);
+
   return (
     <Box sx={categorySx.Box}>
-      <Box>
-        <Grid container spacing={0.5}>
-          {productsToShow.map((p) => (
-            <ProductCard product={p} key={p.id} />
-          ))}
-        </Grid>
-        {totalPages > 1 && (
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={(_, val) => setPage(val)}
-            color="primary"
-            shape="rounded"
-          />
-        )}
-      </Box>
+      {isLoading ? (
+        <Box>Loading...</Box>
+      ) : (
+        <Box>
+          <Grid container spacing={0.5}>
+            {productsToShow.map((p) => (
+              <ProductCard product={p} key={p.id} />
+            ))}
+          </Grid>
+          {totalPages > 1 && (
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={(_, val) => setPage(val)}
+              color="primary"
+              shape="rounded"
+            />
+          )}
+        </Box>
+      )}
     </Box>
   );
 }

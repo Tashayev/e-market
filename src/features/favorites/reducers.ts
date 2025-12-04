@@ -17,3 +17,10 @@ export const toggleFavorite = (
 export const clearFavorites = (state: FavoritesState) => {
   state.items = [];
 };
+
+export const removeFromFavorites = (
+  state: FavoritesState,
+  action: PayloadAction<number>) => {
+  const id = action.payload;
+  state.items = state.items.filter((itemId) => itemId !== id);
+};
