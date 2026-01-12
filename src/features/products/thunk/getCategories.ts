@@ -4,15 +4,21 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import baseService from "@/features/init/baseService";
 //types
 import type { Categories } from "@/types/Products";
+//utils
+import { withErrorHandler } from "@/tools/utils/withErrorHandler";
 
 export const getCategories = createAsyncThunk<Categories[]>(
   "product/getCategories",
   async (_, thunkAPI) => {
-    try {
-      const res = await baseService.get("/categories");
+    return withErrorHandler(
+      async () => {
+        const res = await baseService.get("/categories");
       return res.data;
-    } catch (e: any) {
-      return thunkAPI.rejectWithValue(e.response?.data);
-    }
+},
+      thunkAPI,
+      "Error creating category: "
+    );
+      
+    
   }
 );
