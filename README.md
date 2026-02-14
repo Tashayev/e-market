@@ -4,11 +4,11 @@ Modern e-commerce application built with React, TypeScript, Redux Toolkit, and V
 
 The project demonstrates scalable architecture (FSD approach), centralized API handling, authentication flow, and optimized state management.
 
-🚀 Live Demo
+Live Demo
 
-🔗 https://hhemploeesearch.netlify.app
+https://adil-e-market.netlify.app/auth
 
-🧠 Tech Stack
+Tech Stack
 
 React 19
 
@@ -30,7 +30,7 @@ Jest + React Testing Library
 
 API: https://api.escuelajs.co/api/
 
-⚙️ Features
+Features
 
 User authentication (login / token-based flow)
 
@@ -53,18 +53,6 @@ Toast notifications
 Debounced search
 
 Modular feature-based structure (FSD-inspired)
-
-🏗 Architecture
-
-The project follows a feature-based structure inspired by FSD (Feature-Sliced Design):
-
-src/
- ├── app/
- ├── pages/
- ├── features/
- ├── entities/
- ├── shared/
-
 
 This structure improves:
 
@@ -89,7 +77,7 @@ Axios interceptors attach token to requests
 Protected routes block unauthorized access
 
 📦 Installation
-git clone https://github.com/Tashayev/your-repo-name
+git clone https://github.com/Tashayev/e-market.git
 cd your-repo-name
 npm install
 npm run dev
