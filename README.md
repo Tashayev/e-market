@@ -1,73 +1,103 @@
-# React + TypeScript + Vite 
+E-Market — React E-Commerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern e-commerce application built with React, TypeScript, Redux Toolkit, and Vite.
 
-Currently, two official plugins are available:
+The project demonstrates scalable architecture (FSD approach), centralized API handling, authentication flow, and optimized state management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live Demo
 
-## React Compiler
+https://adil-e-market.netlify.app/auth
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tech Stack
 
-## Expanding the ESLint configuration 
+React 19
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+TypeScript
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Redux Toolkit + Redux Persist
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+React Router
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Axios (with interceptors)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+React Hook Form + Yup validation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+MUI (Material UI)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Vite
+
+Jest + React Testing Library
+
+API: https://api.escuelajs.co/api/
+
+Features
+
+User authentication (login / token-based flow)
+
+Protected routes
+
+Global state management via Redux Toolkit
+
+Persistent store using redux-persist
+
+API layer abstraction with Axios
+
+Axios interceptors for centralized request/response handling
+
+Product catalog with dynamic rendering
+
+Form validation using React Hook Form + Yup
+
+Toast notifications
+
+Debounced search
+
+Modular feature-based structure (FSD-inspired)
+
+This structure improves:
+
+Scalability
+
+Separation of concerns
+
+Reusability
+
+Maintainability
+
+🔐 Authentication Flow
+
+Login request via REST API
+
+Token stored in Redux state
+
+Persisted via redux-persist
+
+Axios interceptors attach token to requests
+
+Protected routes block unauthorized access
+
+📦 Installation
+git clone https://github.com/Tashayev/e-market.git
+cd your-repo-name
+npm install
+npm run dev
+
+🧪 Testing
+
+Jest + React Testing Library configured for component testing.
+
+npm run test
+
+📌 Project Purpose
+
+This project was built to demonstrate:
+
+Scalable frontend architecture
+
+Clean state management
+
+Proper API abstraction
+
+Authentication handling
+
+Production-ready structure
