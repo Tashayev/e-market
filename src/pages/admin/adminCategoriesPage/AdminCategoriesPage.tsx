@@ -13,7 +13,7 @@ export default function AdminCategoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState<Categories | null>(null);
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   
   const handleClick = (
