@@ -1,103 +1,77 @@
-E-Market — React E-Commerce Application
+# E-Market — React E-Commerce Application
 
 Modern e-commerce application built with React, TypeScript, Redux Toolkit, and Vite.
 
-The project demonstrates scalable architecture (FSD approach), centralized API handling, authentication flow, and optimized state management.
+The project demonstrates scalable frontend architecture (FSD approach), centralized API handling, authentication flow, and optimized state management.
 
-Live Demo
+---
 
+## Live Demo
+
+https://adil-e-market.netlify.app/
+
+> Example route:  
 https://adil-e-market.netlify.app/auth
 
-Tech Stack
+---
 
-React 19
+## Tech Stack
 
-TypeScript
+- React 19
+- TypeScript
+- Redux Toolkit + Redux Persist
+- React Router
+- Axios (with interceptors)
+- React Hook Form + Yup
+- MUI (Material UI)
+- Vite
+- Jest + React Testing Library
 
-Redux Toolkit + Redux Persist
+**API:** https://api.escuelajs.co/api/
 
-React Router
+---
 
-Axios (with interceptors)
+## Features
 
-React Hook Form + Yup validation
+- Authentication (login with token-based flow)
+- Protected routes
+- Global state management (Redux Toolkit)
+- Persistent state via redux-persist
+- Centralized API layer with Axios
+- Axios interceptors for auth handling
+- Product catalog with dynamic rendering
+- Form validation (React Hook Form + Yup)
+- Toast notifications
+- Debounced search
+- Feature-Sliced Design (FSD-inspired structure)
 
-MUI (Material UI)
+---
 
-Vite
+## Architecture
 
-Jest + React Testing Library
+The project follows an FSD-inspired architecture:
 
-API: https://api.escuelajs.co/api/
+- Scalable structure
+- Separation of concerns
+- Reusable modules
+- Maintainable codebase
 
-Features
+---
 
-User authentication (login / token-based flow)
+## Authentication Flow
 
-Protected routes
+1. User logs in via REST API  
+2. Token is stored in Redux state  
+3. State is persisted using redux-persist  
+4. Axios interceptors attach token to requests  
+5. Protected routes restrict unauthorized access  
 
-Global state management via Redux Toolkit
+---
 
-Persistent store using redux-persist
+## Installation & Run
 
-API layer abstraction with Axios
-
-Axios interceptors for centralized request/response handling
-
-Product catalog with dynamic rendering
-
-Form validation using React Hook Form + Yup
-
-Toast notifications
-
-Debounced search
-
-Modular feature-based structure (FSD-inspired)
-
-This structure improves:
-
-Scalability
-
-Separation of concerns
-
-Reusability
-
-Maintainability
-
-🔐 Authentication Flow
-
-Login request via REST API
-
-Token stored in Redux state
-
-Persisted via redux-persist
-
-Axios interceptors attach token to requests
-
-Protected routes block unauthorized access
-
-📦 Installation
+```bash
 git clone https://github.com/Tashayev/e-market.git
-cd your-repo-name
+cd e-market
 npm install
 npm run dev
-
-🧪 Testing
-
-Jest + React Testing Library configured for component testing.
-
-npm run test
-
-📌 Project Purpose
-
-This project was built to demonstrate:
-
-Scalable frontend architecture
-
-Clean state management
-
-Proper API abstraction
-
-Authentication handling
-
-Production-ready structure
